@@ -21,11 +21,12 @@ function signup(email,pass){
 function logout(){
     firebase.auth().signOut().then(console.log('logged out'));
 }
-
+let user = {};
 auth.onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
         console.log(firebaseUser);
         //reroute to dashboard
+        user = firebaseUser;
     } else{
         console.log('not logged in');
     }
