@@ -9,11 +9,13 @@ export default class Dashboard extends React.Component{
   render(){
     return(
       <div id="dashboard">
+
         <Profile/>
         
         <div id="workspace">
-          
+
         </div>
+        
       </div>
     );
   }
