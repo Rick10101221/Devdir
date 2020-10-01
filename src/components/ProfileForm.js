@@ -2,9 +2,11 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import {connect} from 'react-redux';
+import Save from '../actions/Save';
 
 // Allows profile edits
-export default class ProfileForm extends React.Component{
+class ProfileForm extends React.Component{
 
   render(){
     return(
@@ -30,7 +32,8 @@ export default class ProfileForm extends React.Component{
         variant="contained"
         color="primary"
         size="small"
-        startIcon={<SaveIcon />}
+        startIcon={<SaveIcon/>}
+        onClick={this.props.save}
         >
         Save
         </Button>
@@ -39,3 +42,11 @@ export default class ProfileForm extends React.Component{
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+      save: () => {dispatch(Save())}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ProfileForm);
