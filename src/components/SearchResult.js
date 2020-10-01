@@ -1,7 +1,8 @@
 import React from 'react';
 
 // A search result card
-class SearchResult extends React.Component{
+export default class Profile extends React.Component{
+  class SearchResult extends React.Component{
 
   render(){
     return;

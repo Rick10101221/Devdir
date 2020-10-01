@@ -1,7 +1,8 @@
 import React from 'react';
 
-// Chat room, with list of chats and conversation history
-class ChatRoom extends React.Component{
+// Represents a chat between 2 people, to be listed
+export default class Profile extends React.Component{
+  class ChatRoom extends React.Component{
 
   render(){
     return;
