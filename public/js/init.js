@@ -5,4 +5,5 @@ firebase.initializeApp({
     projectId: "devdir-alpha",
     storageBucket: "devdir-alpha.appspot.com",
     messagingSenderId: "677076328836"
-  });
+});
+firebase.initializeApp(config);
