@@ -1,7 +1,7 @@
 import React from 'react';
 
-// Left sidebar
-class Profile extends React.Component{
+// Login/Signup Page
+class Auth extends React.Component{
 
   render(){
     return;
