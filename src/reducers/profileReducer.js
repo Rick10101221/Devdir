@@ -4,11 +4,19 @@ let initState = {
   bio: 'bio goes here lorem ipsum dolor',
   link: ['github.com','linkedin.com','email.com'],
   skill: ['Firstname Lastname'],
-  chat: []
+  chat: [],
+  active: false
 }
 
 const profileReducer = (state = initState, action) => {
   switch(action.type){
+    case 'STATUS':
+      return {
+        ...state,
+        active: action.payload
+      }
+      break;
+    case 'SAVE':
     case 'CANCEL':
       return {
         ...state,

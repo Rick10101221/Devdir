@@ -145,6 +145,11 @@
   max-height: 60vh;
 }
 
+#profile-title {
+  display: flex;
+  justify-content: space-between;
+}
+
 #profile-display-skills, #profile-display-links {
   padding: 1em 0;
 }
