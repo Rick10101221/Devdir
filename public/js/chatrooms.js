@@ -84,12 +84,13 @@ function createChatroom(/*user1, user2*/) {
  * @param {Profile} user User (Author) who sent the message.
  * @param {String} message Message to add to chatroom.
  */
-function addMessage(key, user, message, callback) {
+async function addMessage(key, user, message, callback) {
     // This is not working........
-    var chatroom = callback(key);
+    var chatroom = await callback(key);
     console.log("dwad", chatroom);
     console.log(typeof(chatroom), chatroom.length, chatroom[0]);
-    var incMsgNum = chatroom[1] + 1;
+    console.log(chatroom[0].chat);
+    var incMsgNum = chatroom[0].msgNum + 1;
     // increment msgsum 
     var messageNumber = `msg${incMsgNum}`;
 
@@ -100,32 +101,35 @@ function addMessage(key, user, message, callback) {
             "message": message,
             "author": user
         }
-    }
+    };
+
+    var msgNumObj = {
+        "msgNum": incMsgNum
+    };
 
     db.ref(`chatrooms/${key}/chat`).update(messageObj);
+    db.ref(`chatrooms/${key}`).update(msgNumObj);
 }
 
+//let chatrooms = {}
 
 /**
  * Finds a chatroom given a JSON object string.
  * @param {String} key Unique identifier for chatroom.
  */
-function findChatroom(key) {
-    let chatrooms = {}
-    let resChatroom = [];
-    db.ref('chatrooms/').once('value').then((snapshot) => {
+async function findChatroom(key) {
+    let chatrooms = {};
+    let resChatroom = null;
+    await db.ref('chatrooms/').once('value').then((snapshot) => {
         chatrooms = snapshot.val();
-        for (const chatroom in chatrooms) {
-            if (chatroom == key) {
-                resChatroom.push(chatrooms[chatroom]);
-                break;
-            }
-        }
+        console.log(chatrooms, chatrooms[key]);
+        resChatroom = chatrooms[key];
     });
-    return resChatroom;
+    console.log(resChatroom, typeof(resChatroom));
+    return [resChatroom];
 }
 
 
 // driver code
 //createChatroom()
-addMessage("-MIbpZQdR4PENoWSmsWP", "Ritik", "???", findChatroom);
+addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
