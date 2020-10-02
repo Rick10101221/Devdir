@@ -112,10 +112,10 @@ class ProfileForm extends React.Component{
 
 const mapStateToProps = (state) => {
   return{
-    name: state.name,
-    bio: state.bio,
-    link: state.link,
-    skill: state.skill
+    name: state.profile.name,
+    bio: state.profile.bio,
+    link: state.profile.link,
+    skill: state.profile.skill
   }
 }
 
