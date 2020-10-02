@@ -4,6 +4,10 @@ import React from 'react';
 export default class ChatRoom extends React.Component{
 
   render(){
-    return;
+    return(
+      <div className="room">
+        <p>Name, Name</p>
+      </div>
+    );
   }
 }

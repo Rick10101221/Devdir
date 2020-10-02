@@ -8,6 +8,7 @@ import GoSearch from '../actions/GoSearch';
 import IconButton from '@material-ui/core/IconButton';
 import ChatIcon from '@material-ui/icons/Chat';
 import SearchIcon from '@material-ui/icons/Search';
+import Tooltip from "@material-ui/core/Tooltip";
 
 // Dashboard, will contain all subcomponents after login
 class Dashboard extends React.Component{
@@ -15,8 +16,8 @@ class Dashboard extends React.Component{
   render(){
     return(
       <div id="dashboard">
-
         {this.props.chatting ?
+        <Tooltip title="Go to search">
         <IconButton
         variant="contained"
         color="primary"
@@ -24,8 +25,10 @@ class Dashboard extends React.Component{
         size="medium"
         children={<SearchIcon/>}
         onClick={this.props.goSearch}
-        ></IconButton>
+        title="Go to messages"
+        ></IconButton></Tooltip>
         :
+        <Tooltip title="Go to messages">
         <IconButton
         variant="contained"
         color="primary"
@@ -33,13 +36,18 @@ class Dashboard extends React.Component{
         size="medium"
         children={<ChatIcon/>}
         onClick={this.props.goChat}
-        ></IconButton>
+        ></IconButton></Tooltip>
         }
 
         <Profile/>
         
         <div id="workspace">
-
+          {
+            this.props.chatting ?
+            <ChatPage/>:
+            <SearchPage/>
+          }
+          
         </div>
         
       </div>
