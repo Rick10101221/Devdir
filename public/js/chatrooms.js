@@ -54,15 +54,21 @@ function sendIntroMessage(/*message*/) {
 }
 
 
+function addChatroomToUsers(key, user1, user2) {
+    
+}
+
+
 /**
  * Creates single chatroom for user1 and user2.
  * @param {profile} user1 User1's Profile.
  * @param {profile} user2 User2's Profile.
  */
-function createChatroom(/*user1, user2*/) {
+async function createChatroom(/*user1, user2*/) {
     // TODO check if chatroom already exists
     var firstMessage = sendIntroMessage();
-    db.ref(`chatrooms/`).push().set({
+
+    await db.ref(`chatrooms/`).push().set({
         "msgNum": 1,
         "chat": {
             "msg1": {
@@ -75,6 +81,9 @@ function createChatroom(/*user1, user2*/) {
             "user2": user2
         }
     });
+
+    var key = await findChatroom()
+    addChatroomToUsers(key, /*user1, user2*/);
 }
 
 
@@ -85,11 +94,7 @@ function createChatroom(/*user1, user2*/) {
  * @param {String} message Message to add to chatroom.
  */
 async function addMessage(key, user, message, callback) {
-    // This is not working........
     var chatroom = await callback(key);
-    console.log("dwad", chatroom);
-    console.log(typeof(chatroom), chatroom.length, chatroom[0]);
-    console.log(chatroom[0].chat);
     var incMsgNum = chatroom[0].msgNum + 1;
     // increment msgsum 
     var messageNumber = `msg${incMsgNum}`;
@@ -111,7 +116,6 @@ async function addMessage(key, user, message, callback) {
     db.ref(`chatrooms/${key}`).update(msgNumObj);
 }
 
-//let chatrooms = {}
 
 /**
  * Finds a chatroom given a JSON object string.
@@ -120,16 +124,57 @@ async function addMessage(key, user, message, callback) {
 async function findChatroom(key) {
     let chatrooms = {};
     let resChatroom = null;
+
     await db.ref('chatrooms/').once('value').then((snapshot) => {
         chatrooms = snapshot.val();
-        console.log(chatrooms, chatrooms[key]);
         resChatroom = chatrooms[key];
     });
-    console.log(resChatroom, typeof(resChatroom));
+    
+    return [resChatroom];
+}
+
+
+/**
+ * Finds a chatroom given user profile objects.
+ * @param {profile} user1 User1's Profile Object.
+ * @param {profile} user2 User2's Profile Object.
+ */
+async function findChatroom(/*user1, user2*/) {
+    let chatrooms = {};
+    let resChatroom = null;
+    
+    // --------------When we receive actual profiles------------------
+    // let user1Name = user1.name;
+    // let user2Name = user2.name;
+    // ---------------------------------------------------------------
+
+    await db.ref(`chatrooms/`).once('value').then((snapshot) => {
+        chatrooms = snapshot.val();
+        for (const chatroom in chatrooms) {
+            // if (chatrooms[chatroom].names.user1 === user1Name &&
+            //     chatrooms[chatroom].names.user2 === user2Name) {
+            //         resChatroom = chatrooms[chatroom];
+            // }
+            if (chatrooms[chatroom].names.user1 == user1 &&
+                chatrooms[chatroom].names.user2 == user2) {
+                    console.log(chatrooms[chatroom]);
+                    resChatroom = chatroom;
+            }
+        }
+    });
+
     return [resChatroom];
 }
 
 
 // driver code
 //createChatroom()
-addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
+//addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
+async function function1() {
+    var test = await findChatroom();
+    console.log(test);
+    return test;
+}
+
+var var1 = function1();
+console.log(var1[0]);

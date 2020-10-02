@@ -21,10 +21,10 @@ function search(searchedSkill){ //searchedSkill is array
         }
         for(const user in result){
             if(sort[result[user]['priority']]){
-                sort[result[user]['priority']].push(result[user]['profile']);
+                sort[result[user]['priority']].push([user, result[user]['profile']]);
             }
             else{
-                (sort[result[user]['priority']] = []).push(result[user]['profile']);
+                (sort[result[user]['priority']] = []).push([user, result[user]['profile']]);
             }
         }
         let order = 0;
