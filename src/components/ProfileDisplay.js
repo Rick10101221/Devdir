@@ -74,7 +74,7 @@ class ProfileDisplay extends React.Component{
           </FormControl>
 
         </div>
-        <p>{this.props.bio}</p>
+        <pre>{this.props.bio}</pre>
 
         <div id="profile-display-skills">
           {/* Material UI Chips here */}

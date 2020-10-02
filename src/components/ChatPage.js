@@ -13,9 +13,7 @@ export default class Chat extends React.Component{
         <div id="chat-list">
           <ChatRoom/>
           <ChatRoom/>
-          <ChatRoom/>
-          <ChatRoom/>
-          <ChatRoom/>
+ 
           <p>--- No more conversations ---</p>
         </div>
 
@@ -24,13 +22,15 @@ export default class Chat extends React.Component{
           <h3 id="chat-heading">Name, Name</h3>
 
           <div id="chat-history">
-            <p>--- Beginning of chat history ---</p>
-            <ChatMessage/>
-            <ChatMessage/>
+            <div id="chat-history-container">
+              <p>--- Beginning of chat history ---</p>
+              <ChatMessage/>
+              <ChatMessage/>
+            </div>
           </div>
 
           <div id="chat-inputs">
-            <TextField id="message-input" label="Message" variant="filled" fullWidth="true"/>
+            <TextField id="message-input" label="Message" variant="filled" fullWidth="true" multiline rows={2}/>
           </div>
           
         </div>

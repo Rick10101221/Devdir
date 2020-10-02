@@ -7,7 +7,7 @@
   margin-bottom: 7px;
 }
 
-#chat-history .message p {
+#chat-history .message pre {
   text-align: left;
   padding: 1%;
   box-sizing: border-box;
@@ -57,6 +57,11 @@
 #chat-history {
   width: 100%;
   height: calc(100% - 9em);
+  overflow-y: auto;
+}
+#chat-history #chat-history-container {
+  width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -65,8 +70,7 @@
 
 #chat-inputs {
   width: 100%;
-  height: 3.5em;
-  overflow: visible;
+  height: 4em;
 }
 
 #message-input {
@@ -200,7 +204,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+  background-color: #dfdfdf;
   border-radius: 10px;
 }
 
