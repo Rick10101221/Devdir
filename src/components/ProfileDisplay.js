@@ -20,22 +20,22 @@ function Link(props) {
 // Displays profile
 class ProfileDisplay extends React.Component{
   
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
       links: [
         {
           icon: github,
-          link: 'link one'
+          link: props.link[0]
         },
         {
           icon: linkedin,
-          link: 'link two'
+          link: props.link[1]
         },
         {
           icon: mail,
-          link: 'link three'
+          link: props.link[2]
         }
       ]
     };
@@ -51,8 +51,8 @@ class ProfileDisplay extends React.Component{
     return(
       <div id="profile-display">
         
-        <h3>name</h3>
-        <p>bio goes here lorem ipsum dolor</p>
+        <h3>{this.props.name}</h3>
+        <p>{this.props.bio}</p>
 
         <div id="profile-display-skills">
           {/* Material UI Chips here */}
@@ -77,10 +77,19 @@ class ProfileDisplay extends React.Component{
   }
 }
 
+const mapStateToProps = (state) => {
+  return{
+    name: state.name,
+    bio: state.bio,
+    link: state.link,
+    skill: state.skill
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return{
     edit: () => {dispatch(Edit())}
   }
 }
 
-export default connect(null, mapDispatchToProps)(ProfileDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileDisplay);

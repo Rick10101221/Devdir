@@ -1,8 +1,9 @@
-// Action representing user typing
+// Action made to save profile
 
-const Save = () => {
+const Save = (query) => {
   return {
     type: 'SAVE',
+    payload: query
   };
 }
 

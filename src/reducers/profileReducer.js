@@ -1,18 +1,28 @@
 let initState = {
   editProfile: false,
-  name: '',
-  bio: '',
-  link: ['','',''],
-  skill: [''],
+  name: 'Some Dev',
+  bio: 'bio goes here lorem ipsum dolor',
+  link: ['github.com','linkedin.com','email.com'],
+  skill: ['Firstname Lastname'],
   chat: []
 }
 
 const profileReducer = (state = initState, action) => {
   switch(action.type){
-    case 'SAVE':
+    case 'CANCEL':
       return {
         ...state,
         editProfile: false
+      }
+      break;
+    case 'SAVE':
+      return {
+        ...state,
+        editProfile: false,
+        name: action.payload.name,
+        bio: action.payload.bio,
+        link: action.payload.link,
+        skill: action.payload.skill,
       }
       break;
 
@@ -23,14 +33,13 @@ const profileReducer = (state = initState, action) => {
       }
       break;
     
-    case 'Load':
+    case 'LOAD':
       return{
         ...state,
         name: action.payload.name,
         bio: action.payload.bio,
         link: action.payload.link,
         skill: action.payload.skill,
-        chat: action.payload.chat,
       }
 
     default:

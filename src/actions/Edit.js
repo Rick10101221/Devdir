@@ -1,4 +1,4 @@
-// Action representing user typing
+// Action made to edit profile
 
 const Edit = () => {
   return {

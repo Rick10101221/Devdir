@@ -1,4 +1,4 @@
-// Action representing user typing
+// Action made to load profile
 
 const Load = (query) => {
   return {

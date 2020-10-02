@@ -12,7 +12,7 @@ class Profile extends React.Component{
       <div id="profile">
 
         <div id="profile-details">
-          {this.props.editProfile ? <ProfileForm/>:<ProfileDisplay/>}
+          {this.props.editProfile ? <ProfileForm data={this.props.profile} />:<ProfileDisplay/>}
         </div>
 
         <div id="profile-bottom">
@@ -25,7 +25,9 @@ class Profile extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-  return {editProfile: state.editProfile}
+  return {
+    editProfile: state.editProfile,
+  }
 }
 
 export default connect(mapStateToProps)(Profile)
