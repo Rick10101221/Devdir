@@ -41,3 +41,23 @@ function search(searchedSkill){ //searchedSkill is array
     });
     return fill;
 }
+
+
+/*
+I added this code to check why JS functions do not return objects
+correctly. Turns out, search() has the same error as I described in
+chatroom.js. In this case, searchReturn is actually returning an 
+undefined object because callSearch() is running asynchronously.
+*/
+// function callSearch() {
+//     var array = ['c#']
+//     var searchReturn = search(array);
+//     console.log("calling search", searchReturn);
+//     console.log(searchReturn[0].length);
+//     for (var i = 0; i < searchReturn.length; i++) {
+//         console.log("here");
+//         console.log(searchReturn[i]);
+//     }
+// }
+
+// callSearch();

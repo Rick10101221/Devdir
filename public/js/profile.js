@@ -9,7 +9,7 @@
 // }
 let profile = {};
 
-//users are existed in database
+//users exist in database
 function getProfile(){
     db.ref(`profile/${user.uid}`).once('value').then((snapshot) => {
         if(snapshot.val()){
@@ -22,5 +22,5 @@ function getProfile(){
 }
 
 function setProfile(profile){
-    db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile setted")})
+    db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile set")})
 }

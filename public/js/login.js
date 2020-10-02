@@ -1,13 +1,13 @@
 const auth = firebase.auth();
 const db = firebase.database();
 
-//auth
-//login
+// auth
+// login
 function login(email, pass){
     const promise = auth.signInWithEmailAndPassword(email,pass);
     promise.catch(e=> console.log(e.message));
 }
-//singup
+// signup
 function signup(email,pass){
     if(pass.length > 5){
         const promise = auth.createUserWithEmailAndPassword(email,pass);
@@ -17,10 +17,12 @@ function signup(email,pass){
         console.log("password needs to be at least 6 characters long");
     }
 }
-//signout
+
+// signout
 function logout(){
     firebase.auth().signOut().then(console.log('logged out'));
 }
+
 let user = {};
 auth.onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
@@ -31,5 +33,3 @@ auth.onAuthStateChanged(firebaseUser => {
         console.log('not logged in');
     }
 });
-
-db.ref("test/").set({"test": "success"});
