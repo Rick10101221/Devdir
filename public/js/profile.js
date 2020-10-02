@@ -4,7 +4,8 @@
 //     'bio': 'A very random person',
 //     'link': ["https://www.google.com/"],
 //     'skill': ["html", "css", "js", "node.js", "php", "java", "c", "c++", "c#", "python", "reactJS", "github", "docker", "AWS", "heroku", "firebase", "jquery", "sql", "bootstrap"],
-//     'chat': ["placeHolder"]
+//     'chat': ["placeHolder"],
+//     'active: true,
 // }
 let profile = {};
 
