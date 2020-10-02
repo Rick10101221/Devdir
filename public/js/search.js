@@ -41,3 +41,17 @@ function search(searchedSkill){ //searchedSkill is array
     });
     return fill;
 }
+
+
+/*function callSearch() {
+    var array = ['c#']
+    var searchReturn = search(array);
+    console.log("calling search", searchReturn);
+    console.log(searchReturn[0].length);
+    for (var i = 0; i < searchReturn.length; i++) {
+        console.log("here");
+        console.log(searchReturn[i]);
+    }
+}
+
+callSearch();*/
