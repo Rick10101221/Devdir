@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ProfileDisplay from './ProfileDisplay';
 import ProfileForm from './ProfileForm';
+import Button from '@material-ui/core/Button';
 
 // Left sidebar
 class Profile extends React.Component{
@@ -15,7 +16,7 @@ class Profile extends React.Component{
         </div>
 
         <div id="profile-bottom">
-
+          <Button variant="contained" color="secondary">Log Out</Button>
         </div>
 
       </div>
@@ -26,6 +27,5 @@ class Profile extends React.Component{
 const mapStateToProps = (state) => {
   return {editProfile: state.editProfile}
 }
-
 
 export default connect(mapStateToProps)(Profile)

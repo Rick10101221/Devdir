@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import BlockIcon from '@material-ui/icons/Block';
 import {connect} from 'react-redux';
 import Save from '../actions/Save';
 
@@ -11,21 +12,22 @@ class ProfileForm extends React.Component{
   render(){
     return(
       <div id="profile-form">
-        <TextField label="Name" />
+        <TextField label="Name" className="profile-input"/>
 
         <TextField 
         label="Bio"
         multiline
-        rows={5} />
+        rows={5}
+        className="profile-input" />
 
         <div>
           {/* skill chips here*/}
         </div>
 
         <div>
-          <TextField label="Github" />
-          <TextField label="LinkedIn" />
-          <TextField label="Email" />
+          <TextField className="profile-input" label="Github" />
+          <TextField className="profile-input" label="LinkedIn" />
+          <TextField className="profile-input" label="Email" />
         </div>
 
         <Button
@@ -36,6 +38,17 @@ class ProfileForm extends React.Component{
         onClick={this.props.save}
         >
         Save
+        </Button>
+
+        <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        startIcon={<BlockIcon/>}
+        id="cancel"
+        onClick={this.props.save}
+        >
+        Cancel
         </Button>
 
       </div>
