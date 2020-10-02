@@ -20,6 +20,13 @@
   padding-right: 1em;
 }
 
+#nav-button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  background: #ececec;
+}
+
 #profile {
   width: 20%;
   height: 100%;
