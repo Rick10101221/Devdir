@@ -1,9 +1,10 @@
 let users = {};
-function search(searchedSkill){ //searchedSkill is array
+
+async function search(searchedSkill){ //searchedSkill is array
     let result = {};
     let sort = [];
     let fill = [];
-    db.ref('profile/').once('value').then((snapshot)=>{
+    await db.ref('profile/').once('value').then((snapshot)=>{
         users = snapshot.val();
         for(let i = 0; i < searchedSkill.length; i++){
             for (const user in users) {
@@ -19,6 +20,7 @@ function search(searchedSkill){ //searchedSkill is array
                 }
             }
         }
+        //console.log("result", result);
         for(const user in result){
             if(sort[result[user]['priority']]){
                 sort[result[user]['priority']].push([user, result[user]['profile']]);
@@ -27,7 +29,8 @@ function search(searchedSkill){ //searchedSkill is array
                 (sort[result[user]['priority']] = []).push([user, result[user]['profile']]);
             }
         }
-        let order = 0;
+        //console.log("sort", sort);
+        /*let order = 0;
         for(let i = sort.length-1; i >= 0 ; i--){
             if(sort[i]){
                 if(fill[order]){
@@ -37,9 +40,9 @@ function search(searchedSkill){ //searchedSkill is array
                 }
                 order++;
             }
-        }
+        }*/
     });
-    return fill;
+    return sort;
 }
 
 
@@ -49,15 +52,16 @@ correctly. Turns out, search() has the same error as I described in
 chatroom.js. In this case, searchReturn is actually returning an 
 undefined object because callSearch() is running asynchronously.
 */
-// function callSearch() {
-//     var array = ['c#']
-//     var searchReturn = search(array);
-//     console.log("calling search", searchReturn);
-//     console.log(searchReturn[0].length);
-//     for (var i = 0; i < searchReturn.length; i++) {
-//         console.log("here");
-//         console.log(searchReturn[i]);
-//     }
-// }
+async function callSearch() {
+    var array = ['html', 'css', 'js', 'php']
+    var searchReturn = await search(array);
+    //console.log("calling search", searchReturn);
+    //console.log(searchReturn[0].length);
+    //for (var i = 0; i < searchReturn.length; i++) {
+        console.log("here");
+        console.log(searchReturn);
+    //}
+}
 
-// callSearch();
+let candidates = callSearch();
+console.log(ignore(candidates));

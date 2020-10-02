@@ -55,7 +55,7 @@ function sendIntroMessage(/*message*/) {
 
 
 function addChatroomToUsers(key, user1, user2) {
-    
+    return;
 }
 
 
@@ -168,13 +168,13 @@ async function findChatroom(/*user1, user2*/) {
 
 
 // driver code
-//createChatroom()
-//addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
-async function function1() {
-    var test = await findChatroom();
-    console.log(test);
-    return test;
-}
+// createChatroom()
+// addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
+// async function function1() {
+//     var test = await findChatroom();
+//     console.log(test);
+//     return test;
+// }
 
-var var1 = function1();
-console.log(var1[0]);
+// var var1 = function1();
+// console.log(var1[0]);
