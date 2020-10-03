@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap");
-.message {
+.message-content {
   background: #4d33c0;
+  padding: 0.5em 1em;
   width: fit-content;
-  padding: 0 0.5em;
   border-radius: 10px 0 0 10px;
   margin-bottom: 7px;
 }
@@ -12,6 +12,12 @@
   padding: 1%;
   box-sizing: border-box;
   color: white;
+}
+
+#chat-history .message h6 {
+  text-align: right;
+  padding: 1%;
+  box-sizing: border-box;
 }
 
 #chat {
@@ -174,6 +180,17 @@
 
 #cancel {
   margin-left: 5px;
+}
+
+#search {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#search h1 {
+  padding: 0 1em;
 }
 
 * {
