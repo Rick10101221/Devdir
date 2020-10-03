@@ -7,11 +7,9 @@ import mail from '../media/mail.png';
 import {connect} from 'react-redux';
 import Edit from '../actions/Edit';
 import Status from '../actions/Status';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 
 // Links
 function Link(props) {

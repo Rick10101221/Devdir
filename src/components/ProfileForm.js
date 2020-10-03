@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileSkills from './ProfileSkills';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
@@ -69,41 +70,43 @@ class ProfileForm extends React.Component{
         <TextField 
         label="Bio"
         multiline
-        rows={5}
+        rows={1}
+        rowsMax={15}
         className="profile-input" 
         value={this.state.bio}
         onChange={this.handleBio}/>
 
         <div>
-          {/* skill chips here*/}
+          <ProfileSkills/>
         </div>
 
-        <div>
+        <div id="profile-form-links">
           <TextField className="profile-input" label="Github" value={this.state.link[0]} onChange={this.handleGithub}/>
           <TextField className="profile-input" label="LinkedIn" value={this.state.link[1]} onChange={this.handleLinked}/>
           <TextField className="profile-input" label="Email" value={this.state.link[2]} onChange={this.handleMail}/>
         </div>
 
-        <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<SaveIcon/>}
-        onClick={this.handleSave}
-        >
-        Save
-        </Button>
+        <div id="profile-buttons">
+          <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<SaveIcon/>}
+          onClick={this.handleSave}
+          >
+          Save
+          </Button>
 
-        <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<BlockIcon/>}
-        id="cancel"
-        onClick={this.handleCancel}
-        >
-        Cancel
-        </Button>
+          <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<BlockIcon/>}
+          onClick={this.handleCancel}
+          >
+          Cancel
+          </Button>
+        </div>
 
       </div>
     );
