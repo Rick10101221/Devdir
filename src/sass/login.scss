@@ -1,3 +1,33 @@
-p{
-  color: blue;
+#loginContainer{
+  background-color: #dfdfdf;
+  height: 65vh;
+  width: 30vw;
+  margin: 17.5vh 35vw 17.5vh 35vw;
+}
+
+#loginContainer h1{
+  font-size: 3em;
+  text-align: center;
+  margin-top: 8%;
+}
+
+#textInput{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#textInput > div{
+  margin: 7%;
+}
+
+#buttonInput{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+}
+
+#buttonInput > div{
+  margin: 10%;
 }

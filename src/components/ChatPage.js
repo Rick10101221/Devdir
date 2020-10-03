@@ -2,9 +2,18 @@ import React from 'react';
 import ChatRoom from './ChatRoom';
 import ChatMessage from './ChatMessage';
 import TextField from '@material-ui/core/TextField';
+import {connect} from 'react-redux';
+import Send from '../actions/Send';
 
 // Chat page, with list of chats and conversation history
-export default class Chat extends React.Component{
+class Chat extends React.Component{
+
+  handleKey = (e) => {
+    if( e.key === 'Enter'){
+      // TODO send message
+      // TODO refresh messages
+    }
+  }
 
   render(){
     return(
@@ -30,7 +39,7 @@ export default class Chat extends React.Component{
           </div>
 
           <div id="chat-inputs">
-            <TextField id="message-input" label="Message" variant="filled" fullWidth="true" multiline rows={2}/>
+            <TextField id="message-input" label="Message" variant="filled" fullWidth="true" multiline rows={2} onKeyDown={this.handleKey}/>
           </div>
           
         </div>
@@ -39,3 +48,18 @@ export default class Chat extends React.Component{
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return{
+    conversations: state.chat.conversations,
+    chatHistory: state.chat.chatHistory
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    send: () => {dispatch(Send())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

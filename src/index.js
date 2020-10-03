@@ -5,10 +5,13 @@ import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import profileReducer from './reducers/profileReducer';
 import navReducer from './reducers/navReducer';
+import searchReducer from './reducers/searchReducer';
+import chatReducer from './reducers/chatReducer';
 
 let combined = combineReducers({
   profile: profileReducer,
-  nav: navReducer
+  nav: navReducer,
+  search: searchReducer
 });
 let store = createStore( combined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

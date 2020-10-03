@@ -47,6 +47,7 @@ class ProfileDisplay extends React.Component{
   }
 
   handleStatus = (e) =>{
+    // TODO firebase update profile
     this.props.status(e.target.value);
   }
 

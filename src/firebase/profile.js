@@ -1,3 +1,7 @@
+var firebase = require('firebase');
+require('firebase/auth');
+require('firebase/database');
+
 let app = require("init.js").app;
 let init = require("init.js").init;
 
@@ -27,3 +31,5 @@ function getProfile(){
 function setProfile(profile){
     db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile set")})
 }
+
+export default (Init);
