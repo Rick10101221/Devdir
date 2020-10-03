@@ -60,6 +60,8 @@ class ProfileForm extends React.Component{
   }
 
   handleSave = () => {
+    // TODO firebase update profile
+    
     this.props.save({...this.state, tempSkills: this.props.tempSkills});
   }
 

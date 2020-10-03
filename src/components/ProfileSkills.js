@@ -8,7 +8,6 @@ import Temp from '../actions/Temp';
 
 export default function ProfileSkills() {
   const tempSelector = useSelector(state => state.profile.tempSkills);
-  console.log(tempSelector);
   const dispatch = useDispatch();
   const fixedOptions = [];
   const [value, setValue] = React.useState([...tempSelector]);
