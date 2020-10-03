@@ -1,5 +1,6 @@
 let app = require("init.js").app;
 let init = require("init.js").init;
+
 /*
     TODO WORK WITH FRONT-END.
 */
@@ -10,13 +11,7 @@ let init = require("init.js").init;
  * @param {Array} candidates Initial/modified array of potential candidates.
  */
 function ignore(candidates) {
-    for (let i = candidates.length - 1; i >= 0; i++) {
-        if (candidates[i].length != 0) {
-            candidates[i].shift();
-            break;
-        }
-    }
-    return candidates;
+    return removeTopCandidate(candidates);
 }
 
 
@@ -28,6 +23,21 @@ function ignore(candidates) {
  * @param {Array} candidates Initial/modified array of potential candidates.
  */
 function accept(candidateToAccept, candidates) {
-    return;
+    // candidateToAccept Format: [key, {profile}]
+    createChatroom(user, candidateToAccept[1]);
+    return removeTopCandidate(candidates);
 }
 
+
+/**
+ * @param {Array} candidates Initial/modified array of potential candidates.
+ */
+function removeTopCandidate(candidates) {
+    for (let i = candidates.length - 1; i >= 0; i++) {
+        if (candidates[i].length != 0) {
+            candidates[i].shift();
+            break;
+        }
+    }
+    return candidates;
+}

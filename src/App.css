@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap");
+#chat-history .message {
+  width: fit-content;
+  max-width: 100%;
+}
+
 .message-content {
   background: #4d33c0;
-  padding: 0.5em 1em;
+  padding: 0.3em 0.5em;
   width: fit-content;
   border-radius: 10px 0 0 10px;
   margin-bottom: 7px;
@@ -12,6 +17,9 @@
   padding: 1%;
   box-sizing: border-box;
   color: white;
+  width: fit-content;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 #chat-history .message h6 {
@@ -140,6 +148,10 @@
   box-sizing: border-box;
 }
 
+#profile-details {
+  height: 90%;
+}
+
 #profile a {
   color: blue;
   text-decoration: none;
@@ -152,7 +164,8 @@
 
 #profile-display {
   width: 100%;
-  max-height: 60vh;
+  height: 100%;
+  overflow-y: auto;
 }
 
 #profile-title {
@@ -161,25 +174,51 @@
 }
 
 #profile-display-skills, #profile-display-links {
-  padding: 1em 0;
+  padding: 1.5em 0;
+}
+
+#profile-display-skills {
+  overflow-y: auto;
+  height: fit-content;
+  max-height: 45vh;
+}
+
+div.MuiChip-root {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: fit-content;
+  max-width: 100%;
+  text-overflow: ellipsis;
 }
 
 #profile-form {
   width: 100%;
-  max-height: 60vh;
+  height: 100%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .profile-input {
   width: 100%;
 }
 
+#profile-form-links {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 #profile-form button {
   margin-top: 15px;
 }
 
-#cancel {
-  margin-left: 5px;
+#profile-buttons {
+  display: flex;
+  justify-content: space-around;
 }
 
 #search {

@@ -7,11 +7,10 @@ import mail from '../media/mail.png';
 import {connect} from 'react-redux';
 import Edit from '../actions/Edit';
 import Status from '../actions/Status';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import Chip from '@material-ui/core/Chip';
 
 // Links
 function Link(props) {
@@ -52,7 +51,13 @@ class ProfileDisplay extends React.Component{
   }
 
   render(){
+
     let i = 0;
+    
+    let skills = this.props.skill.map((skill) => {
+      return <Chip key={'skill' + i} label={skill.title} color="primary"/>
+    });
+
     let links = this.state.links.map( link => {
       return <Link data={link} key={'key' + i++}/>
     });
@@ -77,7 +82,7 @@ class ProfileDisplay extends React.Component{
         <pre>{this.props.bio}</pre>
 
         <div id="profile-display-skills">
-          {/* Material UI Chips here */}
+          {skills}
         </div>
 
         <div id="profile-display-links">
