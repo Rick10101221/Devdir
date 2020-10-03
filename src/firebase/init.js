@@ -10,6 +10,5 @@ var app = firebase.initializeApp({
     storageBucket: process.env.storageBucket,
     messagingSenderId: process.env.messagingSenderId
 });
-var init = firebase.initializeApp();
 
 module.export = {app: app, init: init};
