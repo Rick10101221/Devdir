@@ -2,9 +2,6 @@ var firebase = require('firebase');
 require('firebase/auth');
 require('firebase/database');
 
-let app = require("init.js").app;
-let init = require("init.js").init;
-
 var app = firebase.initializeApp({
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
