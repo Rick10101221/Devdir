@@ -1,6 +1,6 @@
 //let app = require("init.js").app;
 //let init = require("init.js").init;
-
+var firebase = require('firebase');
 require('firebase/auth');
 require('firebase/database');
 
