@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileSkills from './ProfileSkills';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
@@ -17,7 +18,8 @@ class ProfileForm extends React.Component{
       name: props.name,
       bio: props.bio,
       link: props.link,
-      skill: props.skill
+      skill: props.skill,
+      tempSkills: props.tempSkills
     }
   }
 
@@ -58,7 +60,7 @@ class ProfileForm extends React.Component{
   }
 
   handleSave = () => {
-    this.props.save(this.state);
+    this.props.save({...this.state, tempSkills: this.props.tempSkills});
   }
 
   render(){
@@ -69,41 +71,43 @@ class ProfileForm extends React.Component{
         <TextField 
         label="Bio"
         multiline
-        rows={5}
+        rows={1}
+        rowsMax={15}
         className="profile-input" 
         value={this.state.bio}
         onChange={this.handleBio}/>
 
         <div>
-          {/* skill chips here*/}
+          <ProfileSkills/>
         </div>
 
-        <div>
+        <div id="profile-form-links">
           <TextField className="profile-input" label="Github" value={this.state.link[0]} onChange={this.handleGithub}/>
           <TextField className="profile-input" label="LinkedIn" value={this.state.link[1]} onChange={this.handleLinked}/>
           <TextField className="profile-input" label="Email" value={this.state.link[2]} onChange={this.handleMail}/>
         </div>
 
-        <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<SaveIcon/>}
-        onClick={this.handleSave}
-        >
-        Save
-        </Button>
+        <div id="profile-buttons">
+          <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<SaveIcon/>}
+          onClick={this.handleSave}
+          >
+          Save
+          </Button>
 
-        <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<BlockIcon/>}
-        id="cancel"
-        onClick={this.handleCancel}
-        >
-        Cancel
-        </Button>
+          <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<BlockIcon/>}
+          onClick={this.handleCancel}
+          >
+          Cancel
+          </Button>
+        </div>
 
       </div>
     );
@@ -112,10 +116,11 @@ class ProfileForm extends React.Component{
 
 const mapStateToProps = (state) => {
   return{
-    name: state.name,
-    bio: state.bio,
-    link: state.link,
-    skill: state.skill
+    name: state.profile.name,
+    bio: state.profile.bio,
+    link: state.profile.link,
+    skill: state.profile.skill,
+    tempSkills: state.profile.tempSkills
   }
 }
 

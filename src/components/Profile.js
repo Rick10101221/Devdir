@@ -26,7 +26,7 @@ class Profile extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    editProfile: state.editProfile,
+    editProfile: state.profile.editProfile,
   }
 }
 

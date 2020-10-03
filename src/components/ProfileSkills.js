@@ -3,29 +3,21 @@ import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Skills from '../SkillSet';
-import {useDispatch, useSelector} from 'react-redux';
-import Result from '../actions/Result';
-import Search from '../actions/Search';
+import {useSelector, useDispatch} from 'react-redux';
+import Temp from '../actions/Temp';
 
-export default function TagList() {
-  const searchSelector = useSelector(state => state.search.search);
+export default function ProfileSkills() {
+  const tempSelector = useSelector(state => state.profile.tempSkills);
   const dispatch = useDispatch();
   const fixedOptions = [];
-  const [value, setValue] = React.useState([...searchSelector]);
-
-  function handleSearch(e){
-    if(e.key === 'Enter' && searchSelector.length != 0){
-      // Search here
-      
-    }
-  }
+  const [value, setValue] = React.useState([...tempSelector]);
 
   return (
     <Autocomplete
       multiple
       value={value}
       onChange={(event, newValue) => {
-        dispatch(Search(newValue));
+        dispatch(Temp(newValue));
         setValue([
           ...fixedOptions,
           ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
@@ -36,15 +28,15 @@ export default function TagList() {
       renderTags={(tagValue, getTagProps) =>
         tagValue.map((option, index) => (
           <Chip
+            color="primary"
             label={option.title}
             {...getTagProps({ index })}
             disabled={fixedOptions.indexOf(option) !== -1}
           />
         ))
       }
-      style={{ width: 500 }}
       renderInput={(params) => (
-        <TextField {...params} variant="outlined" placeholder="Search Skill" multiline rows={1} onKeyDown={handleSearch}/>
+        <TextField {...params} variant="outlined" placeholder="Add Skills" multiline rows={1} rowsMax={5} />
       )}
     />
   );

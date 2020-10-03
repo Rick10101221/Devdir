@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import profileReducer from './reducers/profileReducer';
+import navReducer from './reducers/navReducer';
+import searchReducer from './reducers/searchReducer';
+import chatReducer from './reducers/chatReducer';
 
-
-let store = createStore( profileReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+let combined = combineReducers({
+  profile: profileReducer,
+  nav: navReducer,
+  search: searchReducer
+});
+let store = createStore( combined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>

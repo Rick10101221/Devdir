@@ -1,0 +1,18 @@
+#chat-list .room{
+  width: 90%;
+  background: rgb(235, 235, 235);
+  box-sizing: border-box;
+  padding: 1em;
+  margin: 7px auto;
+  border-radius: 10px;
+  cursor: pointer;
+
+  p{
+    text-align: left;
+    width: 100%;
+  }
+}
+
+#chat-list .room:hover{
+  background: rgb(211, 211, 211);
+}

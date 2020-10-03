@@ -6,6 +6,11 @@ import linkedin from '../media/linkedin.png';
 import mail from '../media/mail.png';
 import {connect} from 'react-redux';
 import Edit from '../actions/Edit';
+import Status from '../actions/Status';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Chip from '@material-ui/core/Chip';
 
 // Links
 function Link(props) {
@@ -39,23 +44,45 @@ class ProfileDisplay extends React.Component{
         }
       ]
     };
+  }
 
+  handleStatus = (e) =>{
+    this.props.status(e.target.value);
   }
 
   render(){
+
     let i = 0;
+    
+    let skills = this.props.skill.map((skill) => {
+      return <Chip key={'skill' + i} label={skill.title} color="primary"/>
+    });
+
     let links = this.state.links.map( link => {
       return <Link data={link} key={'key' + i++}/>
     });
 
     return(
       <div id="profile-display">
-        
-        <h3>{this.props.name}</h3>
-        <p>{this.props.bio}</p>
+
+        <div id="profile-title">
+          
+          <h3>{this.props.name}</h3>
+          <FormControl>
+            <Select
+              value={this.props.active}
+              onChange={this.handleStatus}
+            >
+              <MenuItem value={true}>Active</MenuItem>
+              <MenuItem value={false}>Inactive</MenuItem>
+            </Select>
+          </FormControl>
+
+        </div>
+        <pre>{this.props.bio}</pre>
 
         <div id="profile-display-skills">
-          {/* Material UI Chips here */}
+          {skills}
         </div>
 
         <div id="profile-display-links">
@@ -79,16 +106,18 @@ class ProfileDisplay extends React.Component{
 
 const mapStateToProps = (state) => {
   return{
-    name: state.name,
-    bio: state.bio,
-    link: state.link,
-    skill: state.skill
+    name: state.profile.name,
+    bio: state.profile.bio,
+    link: state.profile.link,
+    skill: state.profile.skill,
+    active: state.profile.active
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    edit: () => {dispatch(Edit())}
+    edit: () => {dispatch(Edit())},
+    status: (status) => {dispatch(Status(status))}
   }
 }
 
