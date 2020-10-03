@@ -5,6 +5,17 @@ import Button from '@material-ui/core/Button';
 // Login/Signup Page
 export default class Login extends React.Component{
 
+
+  handleSign = () => {
+    // TODO sign up
+    window.location.assign('/');
+  }
+
+  handleLog = () => {
+    // TODO login
+    window.location.assign('/');
+  }
+
   render(){
     return(
       <div id="loginContainer">
@@ -16,12 +27,12 @@ export default class Login extends React.Component{
         </div>
         <div id="buttonInput">
           <div>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={this.handleSign}>
               Sign Up
             </Button>
           </div>
           <div>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={this.handleLog}>
               Login
             </Button>
           </div>

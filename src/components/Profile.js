@@ -7,6 +7,11 @@ import Button from '@material-ui/core/Button';
 // Left sidebar
 class Profile extends React.Component{
 
+  handleLog = () => {
+    //TODO logout
+    window.location.assign('/auth');
+  }
+
   render(){
     return(
       <div id="profile">
@@ -16,7 +21,7 @@ class Profile extends React.Component{
         </div>
 
         <div id="profile-bottom">
-          <Button variant="contained" color="secondary">Log Out</Button>
+          <Button variant="contained" color="secondary" onClick={this.handleLog}>Log Out</Button>
         </div>
 
       </div>
