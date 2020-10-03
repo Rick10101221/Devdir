@@ -27,3 +27,5 @@ function getProfile(){
 function setProfile(profile){
     db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile set")})
 }
+
+export default (Init);
