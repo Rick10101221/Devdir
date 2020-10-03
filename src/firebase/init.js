@@ -9,4 +9,3 @@ var app = firebase.initializeApp({
 var init = firebase.initializeApp(config);
 
 module.export = {app: app, init: init};
-export default connect(mapStateToProps, mapDispatchToProps)(Init)
