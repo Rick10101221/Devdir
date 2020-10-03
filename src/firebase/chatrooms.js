@@ -135,7 +135,7 @@ async function createChatroom(user1, user2) {
 
     var key = await findChatroom(user1, user2)
     addChatroomToUser(key, user1);
-    addChatroomToUser(key, user2)
+    addChatroomToUser(key, user2);
 }
 
 
