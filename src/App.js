@@ -31,6 +31,7 @@ class App extends React.Component {
     var app = start();
     console.log(app);
 
+    // TODO firebase check authenticated 
     // TODO firebase get profile
     // TODO firebase get conversations
     // TODO firebase refresh messages from conversations[0]
