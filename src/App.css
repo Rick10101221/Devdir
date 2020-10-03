@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap");
+#chat-history .message {
+  width: fit-content;
+  max-width: 100%;
+}
+
 .message-content {
   background: #4d33c0;
-  padding: 0.5em 1em;
+  padding: 0.3em 0.5em;
   width: fit-content;
   border-radius: 10px 0 0 10px;
   margin-bottom: 7px;
@@ -12,6 +17,9 @@
   padding: 1%;
   box-sizing: border-box;
   color: white;
+  width: fit-content;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 #chat-history .message h6 {
