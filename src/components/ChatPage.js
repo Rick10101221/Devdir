@@ -10,9 +10,8 @@ class Chat extends React.Component{
 
   handleKey = (e) => {
     if( e.key === 'Enter'){
-      // Call send message
-      // Recieve messages
-      // Re-render messages
+      // TODO send message
+      // TODO refresh messages
     }
   }
 

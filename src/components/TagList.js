@@ -15,7 +15,7 @@ export default function TagList() {
 
   function handleSearch(e){
     if(e.key === 'Enter' && searchSelector.length !== 0){
-      // Search here
+      // TODO search to results popup
       
     }
   }
