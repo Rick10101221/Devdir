@@ -1,7 +1,7 @@
-.message{
+.message-content{
   background: rgb(77, 51, 192);
+  padding: 0.5em 1em;
   width: fit-content;
-  padding: 0 0.5em;
   border-radius: 10px 0 0 10px;
   margin-bottom: 7px;
 }
@@ -11,4 +11,10 @@
   padding: 1%;
   box-sizing: border-box;
   color: white;
+}
+
+#chat-history .message h6{
+  text-align: right;
+  padding: 1%;
+  box-sizing: border-box;
 }
