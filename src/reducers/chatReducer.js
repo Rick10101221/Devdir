@@ -8,14 +8,7 @@ const navReducer = (state = initState, action) => {
     case 'SEND':
       return {
         ...state,
-        chatting: true
-      }
-      break;
-
-      case 'SWITCH':
-      return {
-        ...state,
-        chatting: false
+        chatHistory: action.payload
       }
       break;
 

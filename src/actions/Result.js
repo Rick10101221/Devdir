@@ -1,4 +1,4 @@
-// Action made to cancel profile edits
+// Action made to display results
 
 const Result = (query) => {
   return {

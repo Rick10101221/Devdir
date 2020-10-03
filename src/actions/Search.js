@@ -1,4 +1,4 @@
-// Action made to cancel profile edits
+// Action made to search devs
 
 const Search = (query) => {
   return {

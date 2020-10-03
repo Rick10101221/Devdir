@@ -1,4 +1,4 @@
-// Action made to cancel profile edits
+// Action made reject a result
 
 const Reject = (query) => {
   return {

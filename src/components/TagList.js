@@ -14,7 +14,7 @@ export default function TagList() {
   const [value, setValue] = React.useState([...searchSelector]);
 
   function handleSearch(e){
-    if(e.key === 'Enter' && searchSelector.length != 0){
+    if(e.key === 'Enter' && searchSelector.length !== 0){
       // Search here
       
     }
