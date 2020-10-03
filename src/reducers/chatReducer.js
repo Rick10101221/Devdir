@@ -10,7 +10,6 @@ const navReducer = (state = initState, action) => {
         ...state,
         chatHistory: action.payload
       }
-      break;
 
     default:
       return state    
