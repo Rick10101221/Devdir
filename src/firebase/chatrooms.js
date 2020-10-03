@@ -1,5 +1,5 @@
-let app = require("init.js").app;
-let init = require("init.js").init;
+//let app = require("init.js").app;
+//let init = require("init.js").init;
 
 require('firebase/auth');
 require('firebase/database');
@@ -29,12 +29,6 @@ require('firebase/database');
 
 NOTE: msgsum indicates the message number in the chat. MAY NOT BE NEEDED.
 
-PROGRESS: Cannot get findChatroom() call inside addMessage() to return
-ANYTHING. I have no idea why. I've looked into asynchronous and synchronous
-functions, callback functions passed in as arguments, and set timeback calls,
-but I haven't figured it out. Spent a solid 3 hours on this. It's 1:44am
-and I'm probably going to wake up really late....
-
 TODO: 1. Add Message to Chatroom, Check if Chatroom exists between 2 users
       2. Function for Refreshing Chatroom (trigger)
 
@@ -60,8 +54,54 @@ function sendIntroMessage(/*message*/) {
 }
 
 
-function addChatroomToUsers(key, user1, user2) {
+/**
+ * Returns all the messages for the current chatroom with a key.
+ * @param {String} key Chatroom key in firebase.
+ */
+async function returnMessagesInChatroom(key) {
+    var chatroom = await findChatroom(key);
+    return chatroom[0].chat;
+}
+
+
+/**
+ * Returns all the messages for the current chatroom with 2 user profiles.
+ * @param {profile} user1 User1's Profile.
+ * @param {profile} user2 User2's Profile.
+ */
+async function returnMessagesInChatroom(user1, user2) {
+    var chatroom = await findChatroom(user1, user2);
+    return chatroom[0].chat;
+}
+
+
+/**
+ * Adds the chatroom's key to a given user.
+ * @param {*} key Chatroom key in firebase.
+ * @param {*} currUser Current user whose chat key will be appended to.
+ */
+function addChatroomToUser(key, currUser) {
+    let chatObj = db.ref(`profile/${currUser.uid}/chat`);
+    chatObj.append(key);
+    db.ref(`profile/${currUser.uid}`).update(chatObj);
     return;
+}
+
+
+/**
+ * Retrieves all active conversations for the current logged-in user.
+ * @param {profile} currUser Current user.
+ */
+async function retrieveAllActiveConversations(currUser) {
+    let userArr = [];
+    let dbChatsArray = db.ref(`profile/${currUser.uid}/chat`);
+    for (const database in dbChatsArray) {
+        let dbChat = await findChatroom(database);
+        let authorsArr = [dbChat[0].names.user1, dbChat[0].names.user2];
+        userArr.push(database);
+        userArr.push(authorsArr);
+    }
+    return userArr;
 }
 
 
@@ -70,7 +110,12 @@ function addChatroomToUsers(key, user1, user2) {
  * @param {profile} user1 User1's Profile.
  * @param {profile} user2 User2's Profile.
  */
-async function createChatroom(/*user1, user2*/) {
+async function createChatroom(user1, user2) {
+    // If chatroom already exists, do nothing and return
+    // Maybe take user to existing chatroom?
+    if (findChatroom(user1, user2).length != 0) {
+        return;
+    }
     // TODO check if chatroom already exists
     var firstMessage = sendIntroMessage();
 
@@ -88,8 +133,9 @@ async function createChatroom(/*user1, user2*/) {
         }
     });
 
-    var key = await findChatroom()
-    addChatroomToUsers(key, /*user1, user2*/);
+    var key = await findChatroom(user1, user2)
+    addChatroomToUser(key, user1);
+    addChatroomToUser(key, user2)
 }
 
 
@@ -99,10 +145,12 @@ async function createChatroom(/*user1, user2*/) {
  * @param {Profile} user User (Author) who sent the message.
  * @param {String} message Message to add to chatroom.
  */
-async function addMessage(key, user, message, callback) {
-    var chatroom = await callback(key);
-    var incMsgNum = chatroom[0].msgNum + 1;
+async function addMessage(key, user, message) {
+    var chatroom = await findChatroom(key);
+
     // increment msgsum 
+    var incMsgNum = chatroom[0].msgNum + 1;
+    
     var messageNumber = `msg${incMsgNum}`;
 
     console.log(incMsgNum);
@@ -157,10 +205,13 @@ async function findChatroom(/*user1, user2*/) {
     await db.ref(`chatrooms/`).once('value').then((snapshot) => {
         chatrooms = snapshot.val();
         for (const chatroom in chatrooms) {
+            // WHEN WE RECIEVE ACTUAL PROFILES
             // if (chatrooms[chatroom].names.user1 === user1Name &&
             //     chatrooms[chatroom].names.user2 === user2Name) {
             //         resChatroom = chatrooms[chatroom];
             // }
+
+            // PLACEHOLDER IF-STATEMENT
             if (chatrooms[chatroom].names.user1 == user1 &&
                 chatrooms[chatroom].names.user2 == user2) {
                     console.log(chatrooms[chatroom]);
@@ -173,14 +224,16 @@ async function findChatroom(/*user1, user2*/) {
 }
 
 
+console.log("testing");
+
 // driver code
 // createChatroom()
 // addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
-// async function function1() {
-//     var test = await findChatroom();
-//     console.log(test);
-//     return test;
-// }
+async function function1() {
+    var test = await findChatroom();
+    console.log(test);
+    return test;
+}
 
-// var var1 = function1();
-// console.log(var1[0]);
+var var1 = function1();
+console.log(var1[0]);

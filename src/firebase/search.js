@@ -66,5 +66,5 @@ async function callSearch() {
     //}
 }
 
-let candidates = callSearch();
-console.log(ignore(candidates));
+// let candidates = callSearch();
+// console.log(ignore(candidates));
