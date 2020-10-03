@@ -1,8 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route,Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
+var test = require('./db/test.js');
 
 class App extends React.Component {
   render(){
@@ -16,7 +17,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/auth" exact>
-              
+              <Login/>
             </Route>
 
           </Switch>
@@ -27,6 +28,8 @@ class App extends React.Component {
   }
 
   componentDidiMount(){
+    test();
+
     // TODO firebase get profile
     // TODO firebase get conversations
     // TODO firebase refresh messages from conversations[0]
