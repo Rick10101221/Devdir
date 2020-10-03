@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
-var test = require('./db/test.js');
+import start from './db/test';
 
 class App extends React.Component {
   render(){
@@ -27,8 +27,9 @@ class App extends React.Component {
     );
   }
 
-  componentDidiMount(){
-    test();
+  componentDidMount(){
+    var app = start();
+    console.log(app);
 
     // TODO firebase get profile
     // TODO firebase get conversations
