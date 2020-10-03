@@ -3,17 +3,22 @@ import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Skills from '../SkillSet';
+import {useSelector, useDispatch} from 'react-redux';
+import Temp from '../actions/Temp';
 
 export default function ProfileSkills() {
+  const tempSelector = useSelector(state => state.profile.tempSkills);
+  console.log(tempSelector);
+  const dispatch = useDispatch();
   const fixedOptions = [];
-  const [value, setValue] = React.useState([...fixedOptions]);
+  const [value, setValue] = React.useState([...tempSelector]);
 
   return (
     <Autocomplete
       multiple
       value={value}
       onChange={(event, newValue) => {
-        console.log(newValue);
+        dispatch(Temp(newValue));
         setValue([
           ...fixedOptions,
           ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
@@ -24,6 +29,7 @@ export default function ProfileSkills() {
       renderTags={(tagValue, getTagProps) =>
         tagValue.map((option, index) => (
           <Chip
+            color="primary"
             label={option.title}
             {...getTagProps({ index })}
             disabled={fixedOptions.indexOf(option) !== -1}
@@ -31,7 +37,7 @@ export default function ProfileSkills() {
         ))
       }
       renderInput={(params) => (
-        <TextField {...params} variant="outlined" placeholder="Add Skills" multiline rows={1} />
+        <TextField {...params} variant="outlined" placeholder="Add Skills" multiline rows={1} rowsMax={5} />
       )}
     />
   );
