@@ -9,7 +9,7 @@ import Send from '../actions/Send';
 class Chat extends React.Component{
 
   handleKey = (e) => {
-    if( e.key === 'Enter'){
+    if( e.key === 'Enter') {
       // TODO send message
       // TODO refresh messages
     }
