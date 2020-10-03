@@ -1,3 +1,6 @@
+let app = require("init.js").app;
+let init = require("init.js").init;
+
 //profile template
 // profile = {
 //     'name': 'Jack Chou',

@@ -1,3 +1,5 @@
+let app = require("init.js").app;
+let init = require("init.js").init;
 /*
     TODO WORK WITH FRONT-END.
 */

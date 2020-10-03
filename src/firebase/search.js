@@ -1,3 +1,6 @@
+let app = require("init.js").app;
+let init = require("init.js").init;
+
 let users = {};
 
 async function search(searchedSkill){ //searchedSkill is array
