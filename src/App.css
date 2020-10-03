@@ -1,4 +1,114 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap");
+#chat-history .message {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.message-content {
+  background: #4d33c0;
+  padding: 0.3em 0.5em;
+  width: fit-content;
+  border-radius: 10px 0 0 10px;
+  margin-bottom: 7px;
+}
+
+#chat-history .message pre {
+  text-align: left;
+  padding: 1%;
+  box-sizing: border-box;
+  color: white;
+  width: fit-content;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+#chat-history .message h6 {
+  text-align: right;
+  padding: 1%;
+  box-sizing: border-box;
+}
+
+#chat {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+
+#chat-list {
+  width: 30%;
+  height: 100%;
+  background: white;
+  padding: 1em 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+#conversation {
+  width: 70%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#chat-list p, #conversation p {
+  text-align: center;
+  margin: 0 auto;
+  padding: 1em 0;
+  width: 100%;
+}
+
+#conversation h3 {
+  width: 100%;
+  height: 3.5em;
+  color: white;
+  padding: 1em;
+  box-sizing: border-box;
+  border-radius: 0 0 0 15px;
+  background: #5d42d6;
+}
+
+#chat-history {
+  width: 100%;
+  height: calc(100% - 9em);
+  overflow-y: auto;
+}
+#chat-history #chat-history-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+#chat-inputs {
+  width: 100%;
+  height: 4em;
+}
+
+#message-input {
+  width: 100%;
+}
+
+#chat-list .room {
+  width: 90%;
+  background: #ebebeb;
+  box-sizing: border-box;
+  padding: 1em;
+  margin: 7px auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#chat-list .room p {
+  text-align: left;
+  width: 100%;
+}
+
+#chat-list .room:hover {
+  background: lightgray;
+}
+
 #dashboard {
   width: 100%;
   height: 100%;
@@ -20,6 +130,13 @@
   padding-right: 1em;
 }
 
+#nav-button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  background: #ececec;
+}
+
 #profile {
   width: 20%;
   height: 100%;
@@ -29,6 +146,10 @@
   justify-content: space-between;
   padding: 1%;
   box-sizing: border-box;
+}
+
+#profile-details {
+  height: 90%;
 }
 
 #profile a {
@@ -43,29 +164,72 @@
 
 #profile-display {
   width: 100%;
-  max-height: 60vh;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#profile-title {
+  display: flex;
+  justify-content: space-between;
 }
 
 #profile-display-skills, #profile-display-links {
-  padding: 1em 0;
+  padding: 1.5em 0;
+}
+
+#profile-display-skills {
+  overflow-y: auto;
+  height: fit-content;
+  max-height: 45vh;
+}
+
+div.MuiChip-root {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: fit-content;
+  max-width: 100%;
+  text-overflow: ellipsis;
 }
 
 #profile-form {
   width: 100%;
-  max-height: 60vh;
+  height: 100%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .profile-input {
   width: 100%;
 }
 
+#profile-form-links {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 #profile-form button {
   margin-top: 15px;
 }
 
-#cancel {
-  margin-left: 5px;
+#profile-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+#search {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#search h1 {
+  padding: 0 1em;
 }
 
 * {
@@ -83,6 +247,21 @@ body {
 #App {
   width: 100%;
   height: 100%;
+}
+
+/*Scrollbar*/
+::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 10px;
 }
 
 /*# sourceMappingURL=App.css.map */
