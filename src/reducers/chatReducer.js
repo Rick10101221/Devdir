@@ -3,7 +3,7 @@ let initState = {
   conversations: []
 }
 
-const navReducer = (state = initState, action) => {
+const chatReducer = (state = initState, action) => {
   switch(action.type){
     case 'SEND':
       return {
@@ -16,4 +16,4 @@ const navReducer = (state = initState, action) => {
   }
 }
 
-export default navReducer;
+export default chatReducer;

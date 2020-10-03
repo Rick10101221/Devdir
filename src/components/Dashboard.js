@@ -14,39 +14,39 @@ import Tooltip from "@material-ui/core/Tooltip";
 class Dashboard extends React.Component{
 
   render(){
+    let button = this.props.chatting ?
+    (<Tooltip title="Go to search">
+    <IconButton
+    variant="contained"
+    color="primary"
+    id="nav-button"
+    size="medium"
+    children={<SearchIcon/>}
+    onClick={this.props.goSearch}
+    ></IconButton></Tooltip>)
+    :
+    (<Tooltip title="Go to messages">
+    <IconButton
+    variant="contained"
+    color="primary"
+    id="nav-button"
+    size="medium"
+    children={<ChatIcon/>}
+    onClick={this.props.goChat}
+    ></IconButton></Tooltip>);
+
+    let page = this.props.chatting ?
+    <ChatPage/>:
+    <SearchPage/>
+
     return(
       <div id="dashboard">
-        {this.props.chatting ?
-        <Tooltip title="Go to search">
-        <IconButton
-        variant="contained"
-        color="primary"
-        id="nav-button"
-        size="medium"
-        children={<SearchIcon/>}
-        onClick={this.props.goSearch}
-        title="Go to messages"
-        ></IconButton></Tooltip>
-        :
-        <Tooltip title="Go to messages">
-        <IconButton
-        variant="contained"
-        color="primary"
-        id="nav-button"
-        size="medium"
-        children={<ChatIcon/>}
-        onClick={this.props.goChat}
-        ></IconButton></Tooltip>
-        }
+        {button}
 
         <Profile/>
         
         <div id="workspace">
-          {
-            this.props.chatting ?
-            <ChatPage/>:
-            <SearchPage/>
-          }
+          {page}
           
         </div>
         

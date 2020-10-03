@@ -11,7 +11,8 @@ import chatReducer from './reducers/chatReducer';
 let combined = combineReducers({
   profile: profileReducer,
   nav: navReducer,
-  search: searchReducer
+  search: searchReducer,
+  chat: chatReducer
 });
 let store = createStore( combined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

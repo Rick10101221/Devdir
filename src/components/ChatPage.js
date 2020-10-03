@@ -39,7 +39,7 @@ class Chat extends React.Component{
           </div>
 
           <div id="chat-inputs">
-            <TextField id="message-input" label="Message" variant="filled" fullWidth="true" multiline rows={2} onKeyDown={this.handleKey}/>
+            <TextField id="message-input" label="Message" variant="filled" fullWidth={true} multiline rows={2} onKeyDown={this.handleKey}/>
           </div>
           
         </div>
