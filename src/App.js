@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
-import Init from './firebase/init';
+import Init from './firebase/Init';
 
 function App() {
   return (
