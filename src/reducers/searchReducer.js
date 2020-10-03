@@ -10,14 +10,12 @@ const navReducer = (state = initState, action) => {
         ...state,
         search: action.payload
       }
-      break;
 
     case 'RESULT':
       return {
         ...state,
         results: action.payload
       }
-      break;
 
     case 'REJECT':
       let newRes = state.results;
@@ -26,14 +24,12 @@ const navReducer = (state = initState, action) => {
         ...state,
         results: newRes
       }
-      break;
 
     case 'ACCEPT':
       return {
         ...state,
         chatting: false
       }
-      break;
 
     default:
       return state    
