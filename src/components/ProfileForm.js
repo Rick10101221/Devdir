@@ -18,7 +18,8 @@ class ProfileForm extends React.Component{
       name: props.name,
       bio: props.bio,
       link: props.link,
-      skill: props.skill
+      skill: props.skill,
+      tempSkills: props.tempSkills
     }
   }
 
@@ -59,7 +60,7 @@ class ProfileForm extends React.Component{
   }
 
   handleSave = () => {
-    this.props.save(this.state);
+    this.props.save({...this.state, tempSkills: this.props.tempSkills});
   }
 
   render(){
@@ -118,7 +119,8 @@ const mapStateToProps = (state) => {
     name: state.profile.name,
     bio: state.profile.bio,
     link: state.profile.link,
-    skill: state.profile.skill
+    skill: state.profile.skill,
+    tempSkills: state.profile.tempSkills
   }
 }
 

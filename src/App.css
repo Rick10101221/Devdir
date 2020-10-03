@@ -156,7 +156,8 @@
 
 #profile-display {
   width: 100%;
-  max-height: 60vh;
+  height: 100%;
+  overflow-y: auto;
 }
 
 #profile-title {
@@ -165,13 +166,26 @@
 }
 
 #profile-display-skills, #profile-display-links {
-  padding: 1em 0;
+  padding: 1.5em 0;
+}
+
+#profile-display-skills {
+  overflow-y: auto;
+  height: fit-content;
+  max-height: 45vh;
+}
+
+div.MuiChip-root {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: fit-content;
+  max-width: 100%;
+  text-overflow: ellipsis;
 }
 
 #profile-form {
   width: 100%;
   height: 100%;
-  max-height: 70vh;
   overflow: auto;
   display: flex;
   flex-direction: column;

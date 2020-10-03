@@ -3,7 +3,8 @@ let initState = {
   name: 'Some Dev',
   bio: 'bio goes here lorem ipsum dolor',
   link: ['https://github.com','https://linkedin.com','email.com'],
-  skill: ['Firstname Lastname'],
+  skill: [{title:"No Skills"}],
+  tempSkills: [{title:"No Skills"}],
   chat: [],
   active: false
 }
@@ -19,6 +20,7 @@ const profileReducer = (state = initState, action) => {
     case 'CANCEL':
       return {
         ...state,
+        tempSkills: state.skill,
         editProfile: false
       }
       break;
@@ -29,10 +31,16 @@ const profileReducer = (state = initState, action) => {
         name: action.payload.name,
         bio: action.payload.bio,
         link: action.payload.link,
-        skill: action.payload.skill,
+        skill: action.payload.tempSkills,
+        tempSkills: action.payload.tempSkills
       }
       break;
-
+    case 'TEMP':
+      return {
+        ...state,
+        tempSkills: action.payload
+      }
+      break;
     case 'EDIT':
       return {
         ...state,
