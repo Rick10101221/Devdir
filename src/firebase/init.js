@@ -1,4 +1,4 @@
-firebase.initializeApp({
+var app = firebase.initializeApp({
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
     databaseURL: process.env.databaseURL,
@@ -6,4 +6,6 @@ firebase.initializeApp({
     storageBucket: process.env.storageBucket,
     messagingSenderId: process.env.messagingSenderId
 });
-firebase.initializeApp(config);
+var init = firebase.initializeApp(config);
+
+module.export = {app: app, init: init};
