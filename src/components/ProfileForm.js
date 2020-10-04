@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 import Save from '../actions/Save';
 import Cancel from '../actions/Cancel';
 
+let setProfile = require('../firebase/profile.js').setProfile;
+
 // Allows profile edits
 class ProfileForm extends React.Component{
 
@@ -61,7 +63,7 @@ class ProfileForm extends React.Component{
 
   handleSave = () => {
     // TODO firebase update profile
-    
+    setProfile({...this.state, active: this.props.active}, this.props.db, this.props.user);
     this.props.save({...this.state, tempSkills: this.props.tempSkills});
   }
 
@@ -122,7 +124,10 @@ const mapStateToProps = (state) => {
     bio: state.profile.bio,
     link: state.profile.link,
     skill: state.profile.skill,
-    tempSkills: state.profile.tempSkills
+    tempSkills: state.profile.tempSkills,
+    active: state.profile.active,
+    db: state.db.db,
+    user: state.db.user
   }
 }
 

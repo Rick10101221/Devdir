@@ -1,26 +1,26 @@
 //profile template
-// profile = {
-//     'name': 'Jack Chou',
-//     'bio': 'A very random person',
-//     'link': ["https://www.google.com/"],
-//     'skill': ["html", "css", "js", "node.js", "php", "java", "c", "c++", "c#", "python", "reactJS", "github", "docker", "AWS", "heroku", "firebase", "jquery", "sql", "bootstrap"],
-//     'chat': ["placeHolder"],
-//     'active: true,
-// }
+/* profile = {
+'bio': "A very random person",
+'chat': ["placeholder"],
+'link': ["https://github.com/", "https://www.linkedin.com/", "name@company.com"],
+'name': "Some Dev",
+'skill': ["Just Joined"],
+'status': false,
+}
+*/
 let profile = {};
 
 //users exist in database
-function getProfile(user, db){
-    console.log(db);
-    db.ref(`profile/${user.uid}`).once('value').then((snapshot) => {
+async function getProfile(db, user){
+    await db.ref(`profile/${user.uid}`).once('value').then((snapshot) => {
         if(snapshot.val()){
-            console.log(snapshot.val);
-            return snapshot.val();
+            profile = snapshot.val();
         }
         else{
             console.log("doesn't exist");
         }
-    })
+    });
+    return profile;
 }
 
 function setProfile(profile, db, user){

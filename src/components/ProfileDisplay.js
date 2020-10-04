@@ -12,39 +12,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 
-// Links
-function Link(props) {
-  return (
-    <div className="display-link">
-      <img src={props.data.icon} alt="icon" width="32px"/>
-      <a href={props.data.link}>{props.data.link}</a>
-    </div>
-  );
-}
-
+var i = 0;
 // Displays profile
 class ProfileDisplay extends React.Component{
-  
-  constructor(props){
-    super(props);
-
-    this.state = {
-      links: [
-        {
-          icon: github,
-          link: props.link[0]
-        },
-        {
-          icon: linkedin,
-          link: props.link[1]
-        },
-        {
-          icon: mail,
-          link: props.link[2]
-        }
-      ]
-    };
-  }
 
   handleStatus = (e) =>{
     // TODO firebase update profile
@@ -52,17 +22,13 @@ class ProfileDisplay extends React.Component{
   }
 
   render(){
-
-    let i = 0;
     
     let skills = this.props.skill.map((skill) => {
+      console.log(skill);
+      console.log(skill.title);
       return <Chip key={'skill' + i} label={skill.title} color="primary"/>
     });
-
-    let links = this.state.links.map( link => {
-      return <Link data={link} key={'key' + i++}/>
-    });
-
+    console.log(skills);
     return(
       <div id="profile-display">
 
@@ -87,7 +53,18 @@ class ProfileDisplay extends React.Component{
         </div>
 
         <div id="profile-display-links">
-          {links}
+          <div className="display-link">
+            <img src={github} alt="icon" width="32px"/>
+            <a href={this.props.link[0]}>{this.props.link[0]}</a>
+          </div>
+          <div className="display-link">
+            <img src={linkedin} alt="icon" width="32px"/>
+            <a href={this.props.link[1]}>{this.props.link[1]}</a>
+          </div>
+          <div className="display-link">
+            <img src={mail} alt="icon" width="32px"/>
+            <a href={this.props.link[2]}>{this.props.link[2]}</a>
+          </div>
         </div>
 
         <Button

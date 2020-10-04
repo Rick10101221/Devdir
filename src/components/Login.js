@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 
 var login = require('../firebase/login.js').login;
 var signup = require('../firebase/login.js').signup;
+var setProfile = require('../firebase/profile.js').setProfile;
 
 // Login/Signup Page
 class Login extends React.Component{
@@ -28,9 +29,18 @@ class Login extends React.Component{
     this.setState({pass: e.target.value})
   }
 
-  handleSign = () => {
+  handleSign = async () => {
     // TODO sign up
-    signup(this.state.email, this.state.pass, this.props.auth);
+    await signup(this.state.email, this.state.pass, this.props.auth);
+    setProfile({
+      'bio': "Click edit to set up your profile",
+      'chat': ["placeholder"],
+      'link': ["https://github.com/", "https://www.linkedin.com/", "name@company.com"],
+      'name': "Some Dev",
+      'skill': ["Just Joined!"],
+      'active': false,
+      }, this.props.db, this.props.user)
+
   }
 
   handleLog = () => {
@@ -74,7 +84,10 @@ class Login extends React.Component{
 const mapStateToProps = (state) => {
   return{
     auth: state.db.auth,
-    log: state.db.logged
+    db: state.db.db,
+    user: state.db.user,
+    log: state.db.logged,
+    
   }
 }
 
