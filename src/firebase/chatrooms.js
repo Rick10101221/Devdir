@@ -114,7 +114,11 @@ async function findChatroomByKey(key, db) {
 
     await db.ref('chatrooms/').once('value').then((snapshot) => {
         chatrooms = snapshot.val();
-        resChatroom = chatrooms[key];
+        if (chatrooms) {
+            resChatroom = chatrooms[key];
+        } else {
+            resChatroom = [];
+        }
     });
     
     return [resChatroom];
@@ -205,7 +209,7 @@ async function addChatroomToUser(key, currUser, db) {
             console.log("Chat object not found");
         }
     });
-    
+
     chatObj.append(key);
     return db.ref(`profile/${currUser.uid}/chat`).update(chatObj);
 }
