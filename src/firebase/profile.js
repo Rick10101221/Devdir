@@ -11,6 +11,7 @@ let profile = {};
 
 //users exist in database
 function getProfile(db){
+    console.log(db);
     db.ref(`profile/${user.uid}`).once('value').then((snapshot) => {
         if(snapshot.val()){
             profile = snapshot.val();
