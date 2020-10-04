@@ -34,6 +34,7 @@ class Chat extends React.Component{
       }
     }
 
+    console.log(this.props);
     return(
       <div id="chat">
 
@@ -44,7 +45,7 @@ class Chat extends React.Component{
 
         <div id="conversation">
 
-          <h3 id="chat-heading">Name, Name</h3>
+          <h3 id="chat-heading">{this.props.conversations[this.props.chatIdx].names.user1}, {this.props.conversations[this.props.chatIdx].names.user2}</h3>
 
           <div id="chat-history">
             <div id="chat-history-container">

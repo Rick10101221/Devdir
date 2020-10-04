@@ -80,6 +80,7 @@ class App extends React.Component {
                 if(!refresh){
                   this.props.convos(snapshot.val());
                   this.props.keys(profile.chat[i]);
+                  this.props.chatIdx(0);
                 }else{
                   this.props.fresh(snapshot.val(), i);
                 }
