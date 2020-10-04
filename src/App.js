@@ -59,7 +59,7 @@ class App extends React.Component {
           //reroute to dashboard
           user = firebaseUser;
           isLoggedIn = true;
-          this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn});
+          this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
       } else{
           console.log('not logged in');
           isLoggedIn = false;
