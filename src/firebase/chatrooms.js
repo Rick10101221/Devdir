@@ -35,7 +35,7 @@ async function createChatroom(user1Id, user2Id, db) {
     let user2Obj = await findProfileById(user2Id, db);
     let user1 = user1Obj[0].name;
     let user2 = user2Obj[0].name;
-
+    console.log('hi');
     // If chatroom already exists, do nothing and return
     // Maybe take user to existing chatroom?
     if ((await findChatroomByUsers(user1, user2, db)).length !== 0) {
@@ -129,7 +129,6 @@ async function findChatroomByKey(key, db) {
     return [resChatroom];
 }
 
-
 /**
  * Adds a message to a chatroom.
  * @param {String} key Unique identifier for chatroom.
@@ -140,6 +139,7 @@ async function addMessage(key, user, message, db) {
     var chatroom = await findChatroomByKey(key, db);
 
     // increment msgsum 
+    console.log(chatroom);
     var incMsgNum = chatroom[0].msgNum + 1;
     
     var messageNumber = `msg${incMsgNum}`;
@@ -250,6 +250,7 @@ async function retrieveAllActiveConversations(currUser, db) {
         temp.push(authorsArr);
         userArr.push(temp);
     }
+
     return userArr;
 }
 

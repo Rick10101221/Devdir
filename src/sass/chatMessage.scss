@@ -3,10 +3,6 @@
   max-width: 100%;
 }
 
-.message-content{
-
-}
-
 #chat-history .message p{
   text-align: left;
   padding: 1%;
@@ -15,6 +11,7 @@
   background: rgb(77, 51, 192);
   padding: 0.7em 0.7em;
   width: fit-content;
+  min-width: 100px;
   border-radius: 10px 0 0 10px;
   margin-bottom: 7px;
 }

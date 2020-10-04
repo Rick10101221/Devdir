@@ -23,7 +23,6 @@ class SearchResult extends React.Component{
 
   handleRight = () => {
     this.props.accept();
-    console.log(this.props);
     create(this.props.user, this.props.other, this.props.db);
     this.props.gochat();
   }

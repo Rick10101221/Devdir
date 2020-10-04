@@ -5,28 +5,33 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import Send from '../actions/Send';
 
+let send = require('../firebase/chatrooms.js').addMessage;
+
 var i = 0;
 // Chat page, with list of chats and conversation history
 class Chat extends React.Component{
 
-  handleKey = (e) => {
+  handleKey = async (e) => {
     if( e.key === 'Enter') {
       // TODO send message
-      // TODO refresh messages
+      send(this.props.keys[this.props.chatIdx], this.props.name, e.target.value, this.props.db)
+      e.target.value = '';
     }
   }
 
   render(){
 
+    let idx = 0;
     let convos = this.props.conversations.map((c)=>{
-      return <ChatRoom a={c.names.user1} b={c.names.user2} key={'con'+i}/>
+      return <ChatRoom a={c.names.user1} b={c.names.user2} c={idx++} key={'con'+i++}/>
     });
 
-    let ob = this.props.conversations[0].chat;
-    console.log(this.props.conversations[0].chat);
     let mess = [];
-    for (const [key, value] of Object.entries(ob)){
-      mess.push(<ChatMessage author={value.author} mess={value.message} key={key + i++}/>);
+    if (this.props.chatIdx !== -1){
+      let ob = this.props.conversations[this.props.chatIdx].chat;
+      for (const [key, value] of Object.entries(ob)){
+        mess.push(<ChatMessage author={value.author} mess={value.message} key={key + i++}/>);
+      }
     }
 
     return(
@@ -49,7 +54,7 @@ class Chat extends React.Component{
           </div>
 
           <div id="chat-inputs">
-            <TextField id="message-input" label="Message" variant="filled" fullWidth={true} multiline rows={2} onKeyDown={this.handleKey}/>
+            <TextField id="message-input" label="Message" variant="filled" fullWidth={true} multiline rows={2} onKeyUp={this.handleKey}/>
           </div>
           
         </div>
@@ -62,7 +67,11 @@ class Chat extends React.Component{
 const mapStateToProps = (state) => {
   return{
     conversations: state.chat.conversations,
-    chatHistory: state.chat.chatHistory
+    chatHistory: state.chat.chatHistory,
+    chatIdx: state.chat.chatIdx,
+    keys: state.chat.keys,
+    name: state.profile.name,
+    db: state.db.db
   }
 }
 

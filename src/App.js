@@ -57,6 +57,7 @@ class App extends React.Component {
 
     auth.onAuthStateChanged(async firebaseUser => {
       if(firebaseUser) {
+        console.log('run');
           //reroute to dashboard
           isLoggedIn = true;
           user = firebaseUser;
@@ -65,17 +66,26 @@ class App extends React.Component {
           profile.skill = profile.skill.map( (skill) => {return {title: skill}});
           this.props.load(profile);
           
-          db.ref(`profile/${user.uid}`).on('value', snapshot => {
-            profile = snapshot.val();
-            db.ref(`chatrooms/${profile.chat[profile.chat.length - 1]}`).on('value', snapshot => 
-            this.props.convos(snapshot.val()));
-          })
-
-          for( let i = 0; i < profile.chat.length - 1; i++){
-            db.ref(`chatrooms/${profile.chat[i]}`).on('value', snapshot => 
-            this.props.convos(snapshot.val()));
-          }
-
+          db.ref(`profile/${user.uid}`).on('value', snapshot =>{ 
+            console.log('hear');
+            this.props.cls();
+            for( let i = 0; i < profile.chat.length; i++){
+              db.ref(`chatrooms/${profile.chat[i]}`).on('value', snapshot => {
+                let refresh = false
+                for( let j = 0; j < this.props.getKeys.length; j++){
+                  if (this.props.getKeys[j] === profile.chat[i]){
+                    refresh = true;
+                  }
+                }
+                if(!refresh){
+                  this.props.convos(snapshot.val());
+                  this.props.keys(profile.chat[i]);
+                }else{
+                  this.props.fresh(snapshot.val(), i);
+                }
+              });
+            }
+          });
 
         } else{
           console.log('not logged in');
@@ -87,11 +97,22 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return{
+    getKeys: state.chat.keys,
+    idx: state.chat.chatIdx
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     init: (obj) => {dispatch(Init(obj))},
     load: (obj) => {dispatch(Load(obj))},
-    convos: (obj) => {dispatch({type:'CONVOS', payload: obj})}
+    convos: (obj) => {dispatch({type:'CONVOS', payload: obj})},
+    fresh: (obj,idx) => {dispatch({type:'FRESH', payload: obj,idx: idx})},
+    chatIdx: (x, i) => {dispatch({type:'VIEW', payload: x, idx: i})},
+    keys: (x) => {dispatch({type:'KEYS', payload: x})},
+    cls: () => {dispatch({type:'CLEAR'})}
   }
 }
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

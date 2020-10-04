@@ -1,10 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 // Represents a chat between 2 people, to be listed
-export default class ChatRoom extends React.Component{
+class ChatRoom extends React.Component{
 
   handleClick = () => {
     // TODO load chat history
+    this.props.view(this.props.c);
+
   }
 
   render(){
@@ -15,3 +18,11 @@ export default class ChatRoom extends React.Component{
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    view: (idx) => {dispatch({type:'VIEW', payload: idx})}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ChatRoom);
