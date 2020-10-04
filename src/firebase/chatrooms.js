@@ -83,7 +83,8 @@ async function returnMessagesInChatroom(user1, user2) {
 function addChatroomToUser(key, currUser) {
     let chatObj = db.ref(`profile/${currUser.uid}/chat`);
     chatObj.append(key);
-    return db.ref(`profile/${currUser.uid}`).update(chatObj);
+    db.ref(`profile/${currUser.uid}`).update(chatObj);
+    return;
 }
 
 
@@ -228,11 +229,11 @@ console.log("testing");
 // driver code
 // createChatroom()
 // addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
-// async function function1() {
-//     var test = await findChatroom();
-//     console.log(test);
-//     return test;
-// }
+async function function1() {
+    var test = await findChatroom();
+    console.log(test);
+    return test;
+}
 
-// var var1 = function1();
-// console.log(var1[0]);
+var var1 = function1();
+console.log(var1[0]);

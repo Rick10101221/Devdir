@@ -53,6 +53,7 @@ class App extends React.Component {
     var auth = firebase.auth();
     var db = firebase.database();
     let user = {};
+    let users = {};
 
     auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
