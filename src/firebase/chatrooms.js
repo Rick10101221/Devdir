@@ -209,10 +209,12 @@ function addChatroomToUser(key, currUser, db) {
  */
 async function retrieveAllActiveConversations(currUser, db) {
     let userArr = [];
-    let dbChatsArray = db.ref(`profile/${currUser.uid}/chat`);
+    let dbChatsArray = await db.ref(`profile/${currUser.uid}/chat`);
+    console.log(dbChatsArray)
     for (const database in dbChatsArray) {
         let dbChat = await findChatroomByKey(database, db);
-        let authorsArr = [dbChat[0].names.user1, dbChat[0].names.user2];
+        console.log(dbChat);
+        let authorsArr = [dbChatnames.user1, dbChat.names.user2];
         let temp = [];
         temp.push(database);
         temp.push(authorsArr);
