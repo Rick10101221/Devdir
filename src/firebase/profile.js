@@ -27,6 +27,7 @@ function setProfile(profile, db, user){
     db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile set")})
 }
 
+
 export {
     getProfile,
     setProfile
