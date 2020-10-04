@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../media/favicon.png';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import {Redirect} from 'react-router-dom';
@@ -44,6 +45,7 @@ class Login extends React.Component{
 
     return(
       <div id="loginContainer">
+        <img src={logo} alt="logo" width="100" style={{display: 'block', margin: 'auto', padding: '3em 0 0 0'}}/>
         <h1>Devdir</h1>
         <form noValidate autoComplete="off">
         <div id="textInput">
