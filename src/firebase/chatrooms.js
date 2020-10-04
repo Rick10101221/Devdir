@@ -195,8 +195,17 @@ async function returnMessagesInChatroomByUsers(user1, user2, db) {
  * @param {profile} currUser Current user whose chat key will be appended to.
  * @return {None} None.
  */
-function addChatroomToUser(key, currUser, db) {
-    let chatObj = db.ref(`profile/${currUser.uid}/chat/0`);
+async function addChatroomToUser(key, currUser, db) {
+    let chatObj = {};
+    await db.ref(`profile/${currUser.uid}/chat/0`)
+    .once('value').then((snapshot) => {
+        if (snapshot.val()) {
+            chatObj = snapshot.val();
+        } else {
+            console.log("Chat object not found");
+        }
+    });
+    
     chatObj.append(key);
     return db.ref(`profile/${currUser.uid}/chat`).update(chatObj);
 }
@@ -209,7 +218,17 @@ function addChatroomToUser(key, currUser, db) {
  */
 async function retrieveAllActiveConversations(currUser, db) {
     let userArr = [];
-    let dbChatsArray = await db.ref(`profile/${currUser.uid}/chat`);
+
+    let dbChatsArray = [];
+    await db.ref(`profile/${currUser.uid}/chat`)
+    .once('value').then((snapshot) => {
+        if (snapshot.val()) {
+            dbChatsArray = snapshot.val();
+        } else {
+            console.log("Database for user not found");
+        }
+    });
+
     console.log(dbChatsArray)
     for (const database in dbChatsArray) {
         let dbChat = await findChatroomByKey(database, db);
