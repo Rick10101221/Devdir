@@ -1,11 +1,3 @@
-var firebase = require('firebase');
-require('firebase/auth');
-require('firebase/database');
-
-let app = require("init.js").app;
-let init = require("init.js").init;
-
-let users = {};
 
 async function search(searchedSkill){ //searchedSkill is array
     let result = {};
@@ -49,3 +41,7 @@ async function callSearch() {
 
 let candidates = callSearch();
 console.log(ignore(candidates));
+
+export {
+    search
+}

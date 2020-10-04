@@ -238,6 +238,16 @@ export {
 // testing driver code
 // createChatroom()
 // addMessage("-MIeqEXXxxtmvAmOQyAa", "Ritik", "???", findChatroom);
+<<<<<<< HEAD
+async function function1() {
+    var test = await findChatroom();
+    console.log(test);
+    return test;
+}
+
+var var1 = function1();
+console.log(var1[0]);
+=======
 // async function function1() {
 //     var test = await findChatroom();
 //     console.log(test);
@@ -245,3 +255,4 @@ export {
 // }
 // var var1 = function1();
 // console.log(var1[0]);
+>>>>>>> bbff9088b60e049c37938098b526d6c6038af5b8
