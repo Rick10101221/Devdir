@@ -56,17 +56,15 @@ class App extends React.Component {
 
     auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
-          console.log(firebaseUser);
           //reroute to dashboard
           user = firebaseUser;
           isLoggedIn = true;
-          console.log(isLoggedIn);
+          this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn});
       } else{
           console.log('not logged in');
           isLoggedIn = false;
       }
     })
-
     this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn});
 
   }
