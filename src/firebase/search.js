@@ -3,7 +3,7 @@ async function search(searchedSkill, db){ //searchedSkill is array
     let result = {};
     let sort = [];
     let users = {};
-    let finalResult = {};
+    let finalResult = [];
     await db.ref('profile/').once('value').then((snapshot)=>{
         users = snapshot.val();
         for(let i = 0; i < searchedSkill.length; i++){
@@ -29,13 +29,11 @@ async function search(searchedSkill, db){ //searchedSkill is array
             }
         }
     });
-
-    for (let i = sorts.length - 1; i >= 0; i++) {
-        for (let j = 0; j < sorts[i].length; j++) {
-            finalResult.unshift(sorts[i][j]);
+    for (let i = sort.length - 1; i >= 1; i--) {
+        for (let j = 0; j < sort[i].length; j++) {
+            finalResult.unshift(sort[i][j]);
         }
     }
-    
     return finalResult;
 }
 

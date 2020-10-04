@@ -30,7 +30,13 @@ const navReducer = (state = initState, action) => {
     case 'ACCEPT':
       return {
         ...state,
-        chatting: false
+        showing: false
+      }
+
+    case 'NONE':
+      return{
+        ...state,
+        showing: false
       }
 
     default:
