@@ -11,8 +11,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import Tooltip from "@material-ui/core/Tooltip";
 import SearchResult from "./SearchResult"
 
-
-
 // Dashboard, will contain all subcomponents after login
 class Dashboard extends React.Component{
 
@@ -49,6 +47,7 @@ class Dashboard extends React.Component{
         <Profile/>
         
         <div id="workspace">
+          {/*<SearchResult/>*/}
           {page}          
         </div>
         

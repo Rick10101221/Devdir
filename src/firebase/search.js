@@ -2,7 +2,7 @@
 async function search(searchedSkill, db){ //searchedSkill is array
     let result = {};
     let sort = [];
-    let fill = [];
+    let users = {};
     await db.ref('profile/').once('value').then((snapshot)=>{
         users = snapshot.val();
         for(let i = 0; i < searchedSkill.length; i++){
@@ -30,17 +30,6 @@ async function search(searchedSkill, db){ //searchedSkill is array
     });
     return sort;
 }
-
-
-async function callSearch() {
-    var array = ['html', 'css', 'js', 'php']
-    var searchReturn = await search(array);
-    console.log("here");
-    console.log(searchReturn);
-}
-
-let candidates = callSearch();
-console.log(ignore(candidates));
 
 export {
     search

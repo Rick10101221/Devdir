@@ -7,16 +7,22 @@ import {useDispatch, useSelector} from 'react-redux';
 import Result from '../actions/Result';
 import Search from '../actions/Search';
 
+let search = require('../firebase/search.js').search;
+
 export default function TagList() {
   const searchSelector = useSelector(state => state.search.search);
+  const db = useSelector(state => state.db.db);
   const dispatch = useDispatch();
   const fixedOptions = [];
   const [value, setValue] = React.useState([...searchSelector]);
 
-  function handleSearch(e){
+  async function handleSearch(e){
     if(e.key === 'Enter' && searchSelector.length !== 0){
       // TODO search to results popup
-      
+      let searches =  searchSelector.map(search => {return search.title});
+      let results = await search( searches, db);
+      setValue([]);
+
     }
   }
 

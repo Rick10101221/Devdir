@@ -38,7 +38,7 @@ class Login extends React.Component{
       'link': ["https://github.com/", "https://www.linkedin.com/", "name@company.com"],
       'name': "Some Dev",
       'skill': ["Just Joined!"],
-      'active': false,
+      'active': true,
       }, this.props.db, this.props.user)
 
   }
