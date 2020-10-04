@@ -222,7 +222,6 @@ async function addChatroomToUser(key, currUser, db) {
  */
 async function retrieveAllActiveConversations(currUser, db) {
     let userArr = [];
-
     let dbChatsArray = [];
     await db.ref(`profile/${currUser.uid}/chat`)
     .once('value').then((snapshot) => {
