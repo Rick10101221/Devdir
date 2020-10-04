@@ -37,6 +37,7 @@ class App extends React.Component {
     require('firebase/auth');
     require('firebase/database');
     let getProfile = require('./firebase/profile.js').getProfile;
+    let conversations = require('./firebase/chatrooms.js').retrieveAllActiveConversations;
     require('dotenv').config();
 
     var app = firebase.initializeApp({
@@ -52,6 +53,8 @@ class App extends React.Component {
     var db = firebase.database();
 
     let user = {};
+    
+   
 
     auth.onAuthStateChanged(async firebaseUser => {
       if(firebaseUser) {
@@ -60,13 +63,15 @@ class App extends React.Component {
           user = firebaseUser;
           this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: firebaseUser});
           let profile =  await getProfile(db, user);
-          console.log(profile);
           profile.skill = profile.skill.map( (skill) => {return {title: skill}});
           this.props.load(profile);
+          let convos = conversations(firebaseUser, db)
+          console.log(convos);
       } else{
           console.log('not logged in');
           isLoggedIn = false;
       }
+      db.ref("test").on('value', snapshot => console.log("update"));
     })
     this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
 

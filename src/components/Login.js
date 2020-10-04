@@ -34,7 +34,7 @@ class Login extends React.Component{
     await signup(this.state.email, this.state.pass, this.props.auth);
     setProfile({
       'bio': "Click edit to set up your profile",
-      'chat': ["placeholder"],
+      'chat': [],
       'link': ["https://github.com/", "https://www.linkedin.com/", "name@company.com"],
       'name': "Some Dev",
       'skill': ["Just Joined!"],
