@@ -1,10 +1,10 @@
 let initState = {
   editProfile: false,
   name: 'Some Dev',
-  bio: 'bio goes here lorem ipsum dolor',
-  link: ['https://github.com','https://linkedin.com','email.com'],
-  skill: [{title:"No Skills"}],
-  tempSkills: [{title:"No Skills"}],
+  bio: 'Click edit to set up your profile',
+  link: ['https://github.com','https://linkedin.com','name@company.com'],
+  skill: [{title:"Just Joined!"}],
+  tempSkills: [{title:"Just Joined!"}],
   chat: [],
   active: false
 }
@@ -54,6 +54,7 @@ const profileReducer = (state = initState, action) => {
         bio: action.payload.bio,
         link: action.payload.link,
         skill: action.payload.skill,
+        active: action.payload.active
       }
 
     default:

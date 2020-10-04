@@ -5,14 +5,11 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import {connect} from 'react-redux';
 import Init from './actions/Init';
+import Load from './actions/Load';
 
 var isLoggedIn = false;
 
 class App extends React.Component {
-
-  constructor(){
-    super();
-  }
 
   render(){
     return (
@@ -39,6 +36,7 @@ class App extends React.Component {
     var firebase = require('firebase');
     require('firebase/auth');
     require('firebase/database');
+    let getProfile = require('./firebase/profile.js').getProfile;
     require('dotenv').config();
 
     var app = firebase.initializeApp({
@@ -52,28 +50,33 @@ class App extends React.Component {
 
     var auth = firebase.auth();
     var db = firebase.database();
-    let user = {};
-    let users = {};
 
-    auth.onAuthStateChanged(firebaseUser => {
+    let user = {};
+
+    auth.onAuthStateChanged(async firebaseUser => {
       if(firebaseUser) {
           //reroute to dashboard
-          user = firebaseUser;
           isLoggedIn = true;
-          this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
+          user = firebaseUser;
+          this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: firebaseUser});
+          let profile =  await getProfile(db, user);
+          console.log(profile);
+          profile.skill = profile.skill.map( (skill) => {return {title: skill}});
+          this.props.load(profile);
       } else{
           console.log('not logged in');
           isLoggedIn = false;
       }
     })
-    this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn});
+    this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
 
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    init: (obj) => {dispatch(Init(obj))}
+    init: (obj) => {dispatch(Init(obj))},
+    load: (obj) => {dispatch(Load(obj))}
   }
 }
 export default connect(null, mapDispatchToProps)(App);

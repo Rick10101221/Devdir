@@ -6,10 +6,8 @@ function login(email, pass, auth){
 // signup
 async function signup(email,pass, auth){
     if(pass.length > 5){
-        const promise = await auth.createUserWithEmailAndPassword(email,pass);
-        promise
+        await auth.createUserWithEmailAndPassword(email,pass)
             .catch(e=> console.log(e.message));
-        //login(email, pass, auth)
     } else {
         alert("password needs to be at least 6 characters long");
     }
