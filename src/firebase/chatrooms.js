@@ -25,19 +25,17 @@ NOTE: msgsum indicates the message number in the chat. MAY NOT BE NEEDED.
 */
 
 
-// =========================================
-// Temp Global Variables for testing purposes.
-var user1 = "Ritik"
-var user2 = "Rickesh"
-// =========================================
-
-
 /**
  * Creates single chatroom for user1 and user2.
- * @param {profile} user1 User1's Profile.
- * @param {profile} user2 User2's Profile.
+ * @param {profile} user1 User1's Id
+ * @param {profile} user2 User2's Id
  */
-async function createChatroom(user1, user2, db) {
+async function createChatroom(user1Id, user2Id, db) {
+    let user1Obj = await findProfileById(user1Id, db)[0];
+    let user2Obj = await findProfileById(user2Id, db)[0];
+    let user1 = user1Obj.name;
+    let user2 = user2Obj.name;
+
     // If chatroom already exists, do nothing and return
     // Maybe take user to existing chatroom?
     if (findChatroomByUsers(user1, user2, db).length != 0) {
@@ -62,8 +60,30 @@ async function createChatroom(user1, user2, db) {
     });
 
     var key = await findChatroomByUsers(user1, user2, db)
-    addChatroomToUser(key, user1, db);
-    addChatroomToUser(key, user2, db);
+    addChatroomToUser(key, user1Obj, db);
+    addChatroomToUser(key, user2Obj, db);
+}
+
+
+/**
+ * Finds a profile given a userid.
+ * @param {String} key Unique identifier for user.
+ * @return {Array} Array containing a profile object.
+ */
+async function findProfileById(key, db) {
+    let profiles = {};
+    let resProfile = [];
+
+    await db.ref('profile/').once('value').then((snapshot) => {
+        profiles = snapshot.val();
+        if (profiles) {
+            resProfile = profile[key];
+        } else {
+            resProfile = [];
+        }
+    });
+    
+    return [resProfile];
 }
 
 
@@ -75,23 +95,11 @@ async function createChatroom(user1, user2, db) {
  */
 async function findChatroomByUsers(user1, user2, db) {
     let chatrooms = {};
-    let resChatroom = null;
-    
-    // --------------When we receive actual profiles------------------
-    // let user1Name = user1.name;
-    // let user2Name = user2.name;
-    // ---------------------------------------------------------------
+    let resChatroom = [];
 
     await db.ref(`chatrooms/`).once('value').then((snapshot) => {
         chatrooms = snapshot.val();
         for (const chatroom in chatrooms) {
-            // WHEN WE RECIEVE ACTUAL PROFILES
-            // if (chatrooms[chatroom].names.user1 === user1Name &&
-            //     chatrooms[chatroom].names.user2 === user2Name) {
-            //         resChatroom = chatrooms[chatroom];
-            // }
-
-            // PLACEHOLDER IF-STATEMENT
             if (chatrooms[chatroom].names.user1 == user1 &&
                 chatrooms[chatroom].names.user2 == user2) {
                     resChatroom = chatroom;
@@ -201,6 +209,7 @@ async function returnMessagesInChatroomByUsers(user1, user2, db) {
  */
 async function addChatroomToUser(key, currUser, db) {
     let chatObj = {};
+
     await db.ref(`profile/${currUser.uid}/chat/0`)
     .once('value').then((snapshot) => {
         if (snapshot.val()) {
@@ -239,7 +248,6 @@ async function retrieveAllActiveConversations(currUser, db) {
         if(!dbChat[0]){
             continue;
         }
-
         let authorsArr = [dbChat[0].names.user1, dbChat[0].names.user2];
         let temp = [];
         temp.push(database);
