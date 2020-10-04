@@ -16,14 +16,14 @@ const profileReducer = (state = initState, action) => {
         ...state,
         active: action.payload
       }
-      break;
+
     case 'CANCEL':
       return {
         ...state,
         tempSkills: state.skill,
         editProfile: false
       }
-      break;
+
     case 'SAVE':
       return {
         ...state,
@@ -34,19 +34,18 @@ const profileReducer = (state = initState, action) => {
         skill: action.payload.tempSkills,
         tempSkills: action.payload.tempSkills
       }
-      break;
+
     case 'TEMP':
       return {
         ...state,
         tempSkills: action.payload
       }
-      break;
+
     case 'EDIT':
       return {
         ...state,
         editProfile: true
       }
-      break;
     
     case 'LOAD':
       return{

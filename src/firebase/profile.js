@@ -1,10 +1,3 @@
-var firebase = require('firebase');
-require('firebase/auth');
-require('firebase/database');
-
-let app = require("init.js").app;
-let init = require("init.js").init;
-
 //profile template
 // profile = {
 //     'name': 'Jack Chou',
@@ -17,10 +10,12 @@ let init = require("init.js").init;
 let profile = {};
 
 //users exist in database
-function getProfile(){
+function getProfile(user, db){
+    console.log(db);
     db.ref(`profile/${user.uid}`).once('value').then((snapshot) => {
         if(snapshot.val()){
-            profile = snapshot.val();
+            console.log(snapshot.val);
+            return snapshot.val();
         }
         else{
             console.log("doesn't exist");
@@ -28,8 +23,11 @@ function getProfile(){
     })
 }
 
-function setProfile(profile){
+function setProfile(profile, db, user){
     db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile set")})
 }
 
-export default (Init);
+export {
+    getProfile,
+    setProfile
+}

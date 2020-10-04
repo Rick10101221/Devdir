@@ -3,9 +3,17 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
-var test = require('./db/test.js');
+import {connect} from 'react-redux';
+import Init from './actions/Init';
+
+var isLoggedIn = false;
 
 class App extends React.Component {
+
+  constructor(){
+    super();
+  }
+
   render(){
     return (
       <div id="App">
@@ -16,7 +24,7 @@ class App extends React.Component {
               <Dashboard/>
             </Route>
 
-            <Route path="/auth" exact>
+            <Route path="/auth">
               <Login/>
             </Route>
 
@@ -27,13 +35,45 @@ class App extends React.Component {
     );
   }
 
-  componentDidiMount(){
-    test();
+  componentDidMount(){
+    var firebase = require('firebase');
+    require('firebase/auth');
+    require('firebase/database');
+    require('dotenv').config();
 
-    // TODO firebase get profile
-    // TODO firebase get conversations
-    // TODO firebase refresh messages from conversations[0]
+    var app = firebase.initializeApp({
+      apiKey: process.env.REACT_APP_apiKey,
+      authDomain: process.env.REACT_APP_authDomain,
+      databaseURL: process.env.REACT_APP_databaseURL,
+      projectId: process.env.REACT_APP_projectId,
+      storageBucket: process.env.REACT_APP_storageBucket,
+      messagingSenderId: process.env.REACT_APP_messagingSenderId
+    });
+
+    var auth = firebase.auth();
+    var db = firebase.database();
+    let user = {};
+    let users = {};
+
+    auth.onAuthStateChanged(firebaseUser => {
+      if(firebaseUser) {
+          //reroute to dashboard
+          user = firebaseUser;
+          isLoggedIn = true;
+          this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
+      } else{
+          console.log('not logged in');
+          isLoggedIn = false;
+      }
+    })
+    this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn});
+
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    init: (obj) => {dispatch(Init(obj))}
+  }
+}
+export default connect(null, mapDispatchToProps)(App);

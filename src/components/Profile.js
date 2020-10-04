@@ -4,8 +4,16 @@ import ProfileDisplay from './ProfileDisplay';
 import ProfileForm from './ProfileForm';
 import Button from '@material-ui/core/Button';
 
+var logout = require('../firebase/login.js').logout;
+
 // Left sidebar
 class Profile extends React.Component{
+
+  handleLog = () => {
+    //TODO logout
+    logout(null, this.props.app);
+    window.location.assign('/auth');
+  }
 
   render(){
     return(
@@ -16,7 +24,7 @@ class Profile extends React.Component{
         </div>
 
         <div id="profile-bottom">
-          <Button variant="contained" color="secondary">Log Out</Button>
+          <Button variant="contained" color="secondary" onClick={this.handleLog}>Log Out</Button>
         </div>
 
       </div>
@@ -27,6 +35,7 @@ class Profile extends React.Component{
 const mapStateToProps = (state) => {
   return {
     editProfile: state.profile.editProfile,
+    app: state.db.app
   }
 }
 

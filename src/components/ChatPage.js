@@ -9,7 +9,7 @@ import Send from '../actions/Send';
 class Chat extends React.Component{
 
   handleKey = (e) => {
-    if( e.key === 'Enter'){
+    if( e.key === 'Enter') {
       // TODO send message
       // TODO refresh messages
     }
@@ -39,7 +39,7 @@ class Chat extends React.Component{
           </div>
 
           <div id="chat-inputs">
-            <TextField id="message-input" label="Message" variant="filled" fullWidth="true" multiline rows={2} onKeyDown={this.handleKey}/>
+            <TextField id="message-input" label="Message" variant="filled" fullWidth={true} multiline rows={2} onKeyDown={this.handleKey}/>
           </div>
           
         </div>

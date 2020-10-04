@@ -3,18 +3,17 @@ let initState = {
   conversations: []
 }
 
-const navReducer = (state = initState, action) => {
+const chatReducer = (state = initState, action) => {
   switch(action.type){
     case 'SEND':
       return {
         ...state,
         chatHistory: action.payload
       }
-      break;
 
     default:
       return state    
   }
 }
 
-export default navReducer;
+export default chatReducer;

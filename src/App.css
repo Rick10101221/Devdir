@@ -354,7 +354,7 @@ div.MuiChip-root {
   font-family: "Titillium Web", sans-serif;
 }
 
-body {
+body, #app {
   width: 100vw;
   height: 100vh;
 }

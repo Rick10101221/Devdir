@@ -11,6 +11,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Tooltip from "@material-ui/core/Tooltip";
 import SearchResult from "./SearchResult"
 
+let getProfile = require('../firebase/profile.js').getProfile;
+
 // Dashboard, will contain all subcomponents after login
 class Dashboard extends React.Component{
 
@@ -47,18 +49,29 @@ class Dashboard extends React.Component{
         <Profile/>
         
         <div id="workspace">
-          <SearchResult/>
-          
+          {page}          
         </div>
         
       </div>
     );
   }
+
+  componentDidMount(){
+    // TODO firebase get profile
+    console.log(this.props);
+    let profile = getProfile(this.props.db, this.props.user);
+    console.log(profile);
+
+    // TODO firebase get conversations
+    // TODO firebase refresh messages from conversations[0]
+  }
 }
 
 const mapStateToProps = (state) => {
   return{
-    chatting: state.nav.chatting
+    chatting: state.nav.chatting,
+    db: state.db.db,
+    user: state.db.user
   }
 } 
 

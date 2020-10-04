@@ -7,11 +7,14 @@ import profileReducer from './reducers/profileReducer';
 import navReducer from './reducers/navReducer';
 import searchReducer from './reducers/searchReducer';
 import chatReducer from './reducers/chatReducer';
+import dbReducer from './reducers/dbReducer';
 
 let combined = combineReducers({
   profile: profileReducer,
   nav: navReducer,
-  search: searchReducer
+  search: searchReducer,
+  chat: chatReducer,
+  db: dbReducer
 });
 let store = createStore( combined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

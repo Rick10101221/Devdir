@@ -1,42 +1,27 @@
-var firebase = require('firebase');
-require('firebase/auth');
-require('firebase/database');
-
-let app = require("init.js").app;
-let init = require("init.js").init;
-
-const auth = firebase.auth();
-const db = firebase.database();
-
-// auth
 // login
-function login(email, pass){
+function login(email, pass, auth){
     const promise = auth.signInWithEmailAndPassword(email,pass);
     promise.catch(e=> console.log(e.message));
 }
 // signup
-function signup(email,pass){
+async function signup(email,pass, auth){
     if(pass.length > 5){
-        const promise = auth.createUserWithEmailAndPassword(email,pass);
+        const promise = await auth.createUserWithEmailAndPassword(email,pass);
         promise
             .catch(e=> console.log(e.message));
+        //login(email, pass, auth)
     } else {
-        console.log("password needs to be at least 6 characters long");
+        alert("password needs to be at least 6 characters long");
     }
 }
 
 // signout
-function logout(){
+function logout(auth, firebase){
     firebase.auth().signOut().then(console.log('logged out'));
 }
 
-let user = {};
-auth.onAuthStateChanged(firebaseUser => {
-    if(firebaseUser) {
-        console.log(firebaseUser);
-        //reroute to dashboard
-        user = firebaseUser;
-    } else{
-        console.log('not logged in');
-    }
-});
+export {
+    login,
+    signup,
+    logout
+}

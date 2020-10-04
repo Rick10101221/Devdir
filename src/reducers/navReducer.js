@@ -9,14 +9,12 @@ const navReducer = (state = initState, action) => {
         ...state,
         chatting: true
       }
-      break;
 
       case 'GOSEARCH':
       return {
         ...state,
         chatting: false
       }
-      break;
 
     default:
       return state    
