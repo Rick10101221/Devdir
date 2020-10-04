@@ -140,14 +140,22 @@
 #loginContainer {
   background-color: #dfdfdf;
   height: 65vh;
-  width: 30vw;
-  margin: 17.5vh 35vw 17.5vh 35vw;
+  width: 26.5vw;
+  margin: 17.5vh 36.75vw 17.5vh 36.75vw;
 }
 
-#loginContainer h1 {
-  font-size: 3em;
+#loginContainer > img {
+  height: 12vh;
+  width: 12vh;
+  display: block;
+  margin: auto;
+  margin-top: 9%;
+}
+
+#loginContainer > h1 {
+  font-size: 3.1em;
   text-align: center;
-  margin-top: 8%;
+  margin-top: 3%;
 }
 
 #textInput {
@@ -157,7 +165,7 @@
 }
 
 #textInput > div {
-  margin: 7%;
+  margin-top: 6%;
 }
 
 #buttonInput {
@@ -168,7 +176,7 @@
 }
 
 #buttonInput > div {
-  margin: 10%;
+  margin: 12%;
 }
 
 #profile {
