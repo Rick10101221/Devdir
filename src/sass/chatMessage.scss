@@ -4,21 +4,19 @@
 }
 
 .message-content{
-  background: rgb(77, 51, 192);
-  padding: 0.3em 0.5em;
-  width: fit-content;
-  border-radius: 10px 0 0 10px;
-  margin-bottom: 7px;
+
 }
 
-#chat-history .message pre{
+#chat-history .message p{
   text-align: left;
   padding: 1%;
   box-sizing: border-box;
   color: white;
+  background: rgb(77, 51, 192);
+  padding: 0.7em 0.7em;
   width: fit-content;
-  word-wrap: break-word;
-  white-space: pre-wrap;
+  border-radius: 10px 0 0 10px;
+  margin-bottom: 7px;
 }
 
 #chat-history .message h6{

@@ -10,7 +10,7 @@ export default class ChatRoom extends React.Component{
   render(){
     return(
       <div className="room" onClick={this.handleClick}>
-        <p>Name, Name</p>
+        <p>{this.props.a}, {this.props.b}</p>
       </div>
     );
   }

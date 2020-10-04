@@ -5,7 +5,7 @@ let initState = {
   link: ['https://github.com','https://linkedin.com','name@company.com'],
   skill: [{title:"Just Joined!"}],
   tempSkills: [{title:"Just Joined!"}],
-  chat: [],
+  chat: [''],
   active: false
 }
 

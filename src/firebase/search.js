@@ -1,5 +1,5 @@
 
-async function search(searchedSkill, db){ //searchedSkill is array
+async function search(searchedSkill, uid, db){ //searchedSkill is array
     let result = {};
     let sort = [];
     let users = {};
@@ -34,6 +34,15 @@ async function search(searchedSkill, db){ //searchedSkill is array
             finalResult.unshift(sort[i][j]);
         }
     }
+    console.log(uid.uid);
+    for( let i = 0; i < finalResult.length; i ++){
+        if( finalResult[i][0] === uid.uid){
+
+            finalResult.splice(i, 1);
+            break;
+        }
+    }
+    console.log(finalResult);
     return finalResult;
 }
 
