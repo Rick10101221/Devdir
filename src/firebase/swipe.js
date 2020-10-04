@@ -1,18 +1,7 @@
-var firebase = require('firebase');
-require('firebase/auth');
-require('firebase/database');
-
-let app = require("init.js").app;
-let init = require("init.js").init;
-
-/*
-    TODO WORK WITH FRONT-END.
-*/
-
-
 /**
  * Ignores and rejects the candidate. Remove from candidate pool.
  * @param {Array} candidates Initial/modified array of potential candidates.
+ * @return {Array} Candidates array after removal.
  */
 function ignore(candidates) {
     return removeTopCandidate(candidates);
@@ -25,6 +14,7 @@ function ignore(candidates) {
  * be one set in the current user's profile settings.
  * @param {profile} candidateToAccept Candidate to accept.
  * @param {Array} candidates Initial/modified array of potential candidates.
+ * @return {Array} Candidates array after removal.
  */
 function accept(candidateToAccept, candidates) {
     // candidateToAccept Format: [key, {profile}]
@@ -35,6 +25,7 @@ function accept(candidateToAccept, candidates) {
 
 /**
  * @param {Array} candidates Initial/modified array of potential candidates.
+ * @return {Array} Candidates array after removal.
  */
 function removeTopCandidate(candidates) {
     for (let i = candidates.length - 1; i >= 0; i++) {
@@ -44,4 +35,11 @@ function removeTopCandidate(candidates) {
         }
     }
     return candidates;
+}
+
+
+export {
+    ignore,
+    accept,
+    removeTopCandidate
 }
