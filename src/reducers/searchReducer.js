@@ -1,6 +1,7 @@
 let initState = {
   search: [],
   results: [],
+  showing: false
 }
 
 const navReducer = (state = initState, action) => {
@@ -14,7 +15,8 @@ const navReducer = (state = initState, action) => {
     case 'RESULT':
       return {
         ...state,
-        results: action.payload
+        results: action.payload,
+        showing: true
       }
 
     case 'REJECT':

@@ -22,6 +22,7 @@ export default function TagList() {
       let searches =  searchSelector.map(search => {return search.title});
       let results = await search( searches, db);
       setValue([]);
+      dispatch(Result(results));
 
     }
   }

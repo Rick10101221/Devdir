@@ -40,6 +40,11 @@ class Dashboard extends React.Component{
     <ChatPage/>:
     <SearchPage/>
 
+    let browse = (<div></div>)
+    if(this.props.showing){
+      browse = <SearchResult/>
+    }
+
     return(
       <div id="dashboard">
         {button}
@@ -47,7 +52,7 @@ class Dashboard extends React.Component{
         <Profile/>
         
         <div id="workspace">
-          {/*<SearchResult/>*/}
+          {browse}
           {page}          
         </div>
         
@@ -66,7 +71,8 @@ const mapStateToProps = (state) => {
   return{
     chatting: state.nav.chatting,
     db: state.db.db,
-    user: state.db.user
+    user: state.db.user,
+    showing: state.search.showing
   }
 } 
 
