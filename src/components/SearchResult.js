@@ -4,11 +4,13 @@ import linkedin from '../media/linkedin.png';
 import mail from '../media/mail.png';
 import swipeLeft from '../media/swipeLeft.png'
 import swipeRight from '../media/swipeRight.png'
+import Chip from '@material-ui/core/Chip';
 import {connect} from 'react-redux';
 import Reject from '../actions/Reject';
 import Accept from '../actions/Accept';
 import GoChat from '../actions/GoChat';
 
+var i = 0;
 // A search result card
 class SearchResult extends React.Component{
 
@@ -28,6 +30,8 @@ class SearchResult extends React.Component{
       return null;
     }
 
+    let skill = this.props.result[1].skill.map((skill) => {return <Chip label={skill} color="primary" key={i++}/>});
+
     return(
       <div id="overlay">
         <img id="swipeLeft" src={swipeLeft} onClick={this.handleLeft}/>
@@ -36,7 +40,7 @@ class SearchResult extends React.Component{
           <h1 id="resultName">{this.props.result[1].name}</h1>
           <p id="resultBio">{this.props.result[1].bio}</p>
           <div id="profile-display-skills">
-
+            {skill}
           </div>
           <div id="linkContainer">
             <img src={github} alt="#"/>
@@ -52,7 +56,7 @@ class SearchResult extends React.Component{
 const mapStateToProps = (state) => {
   return{
     result: state.search.results[0],
-    count: state.search.results.length
+    count: state.search.results.length,
   }
 }
 
