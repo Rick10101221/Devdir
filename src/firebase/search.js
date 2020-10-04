@@ -1,5 +1,5 @@
 
-async function search(searchedSkill){ //searchedSkill is array
+async function search(searchedSkill, db){ //searchedSkill is array
     let result = {};
     let sort = [];
     let fill = [];

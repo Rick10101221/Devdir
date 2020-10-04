@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChatIcon from '@material-ui/icons/Chat';
 import SearchIcon from '@material-ui/icons/Search';
 import Tooltip from "@material-ui/core/Tooltip";
+import SearchResult from "./SearchResult"
 
 
 
@@ -48,8 +49,7 @@ class Dashboard extends React.Component{
         <Profile/>
         
         <div id="workspace">
-          {page}
-          
+          {page}          
         </div>
         
       </div>
