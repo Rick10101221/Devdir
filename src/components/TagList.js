@@ -12,6 +12,7 @@ let search = require('../firebase/search.js').search;
 export default function TagList() {
   const searchSelector = useSelector(state => state.search.search);
   const db = useSelector(state => state.db.db);
+  const user = useSelector(state => state.db.user);
   const dispatch = useDispatch();
   const fixedOptions = [];
   const [value, setValue] = React.useState([...searchSelector]);
@@ -20,7 +21,7 @@ export default function TagList() {
     if(e.key === 'Enter' && searchSelector.length !== 0){
       // TODO search to results popup
       let searches =  searchSelector.map(search => {return search.title});
-      let results = await search( searches, db);
+      let results = await search(searches, user, db);
       setValue([]);
       dispatch(Result(results));
 

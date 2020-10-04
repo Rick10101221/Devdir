@@ -6,7 +6,7 @@
                 "user1": 'bob',
                 "user2": 'dylan'
             }
-            "messages": {
+            "chat": {
                 "msg1": {
                     "message": 'sup',
                     "author": 'dylan'
@@ -31,21 +31,21 @@ NOTE: msgsum indicates the message number in the chat. MAY NOT BE NEEDED.
  * @param {profile} user2 User2's Id
  */
 async function createChatroom(user1Id, user2Id, db) {
-    let user1Obj = await findProfileById(user1Id, db)[0];
-    let user2Obj = await findProfileById(user2Id, db)[0];
-    let user1 = user1Obj.name;
-    let user2 = user2Obj.name;
+    let user1Obj = await findProfileById(user1Id, db);
+    let user2Obj = await findProfileById(user2Id, db);
+    let user1 = user1Obj[0].name;
+    let user2 = user2Obj[0].name;
 
     // If chatroom already exists, do nothing and return
     // Maybe take user to existing chatroom?
-    if (findChatroomByUsers(user1, user2, db).length != 0) {
+    if ((await findChatroomByUsers(user1, user2, db)).length !== 0) {
         return;
     }
 
     // TODO check if chatroom already exists
     var firstMessage = sendIntroMessage();
 
-    await db.ref(`chatrooms/`).push().set({
+    await db.ref(`chatrooms`).push().set({
         "msgNum": 1,
         "chat": {
             "msg1": {
@@ -60,8 +60,8 @@ async function createChatroom(user1Id, user2Id, db) {
     });
 
     var key = await findChatroomByUsers(user1, user2, db)
-    addChatroomToUser(key, user1Obj, db);
-    addChatroomToUser(key, user2Obj, db);
+    addChatroomToUser(key, user1Id, db);
+    addChatroomToUser(key, user2Id, db);
 }
 
 
@@ -77,12 +77,11 @@ async function findProfileById(key, db) {
     await db.ref('profile/').once('value').then((snapshot) => {
         profiles = snapshot.val();
         if (profiles) {
-            resProfile = profile[key];
+            resProfile = profiles[key];
         } else {
             resProfile = [];
         }
     });
-    
     return [resProfile];
 }
 
@@ -100,14 +99,13 @@ async function findChatroomByUsers(user1, user2, db) {
     await db.ref(`chatrooms/`).once('value').then((snapshot) => {
         chatrooms = snapshot.val();
         for (const chatroom in chatrooms) {
-            if (chatrooms[chatroom].names.user1 == user1 &&
-                chatrooms[chatroom].names.user2 == user2) {
+            if (chatrooms[chatroom].names.user1 === user1 &&
+                chatrooms[chatroom].names.user2 === user2) {
                     resChatroom = chatroom;
             }
         }
     });
-
-    return [resChatroom];
+    return resChatroom.length === 0 ? resChatroom:[resChatroom];
 }
 
 
@@ -128,7 +126,6 @@ async function findChatroomByKey(key, db) {
             resChatroom = [];
         }
     });
-    
     return [resChatroom];
 }
 
@@ -147,7 +144,6 @@ async function addMessage(key, user, message, db) {
     
     var messageNumber = `msg${incMsgNum}`;
 
-    console.log(incMsgNum);
 
     var messageObj = {
         [messageNumber]: {
@@ -172,8 +168,8 @@ async function addMessage(key, user, message, db) {
  *                         right on user2's profile in search query.
  * @return {String} Intro message.
  */
-function sendIntroMessage(message) {
-    //var message = "Hey baby ;)";
+function sendIntroMessage() {
+    var message = "Hi there!";
     return message;
 }
 
@@ -209,8 +205,7 @@ async function returnMessagesInChatroomByUsers(user1, user2, db) {
  */
 async function addChatroomToUser(key, currUser, db) {
     let chatObj = {};
-
-    await db.ref(`profile/${currUser.uid}/chat/0`)
+    await db.ref(`profile/${currUser}/chat`)
     .once('value').then((snapshot) => {
         if (snapshot.val()) {
             chatObj = snapshot.val();
@@ -219,8 +214,11 @@ async function addChatroomToUser(key, currUser, db) {
         }
     });
 
-    chatObj.append(key);
-    return db.ref(`profile/${currUser.uid}/chat`).update(chatObj);
+    chatObj.push(key[0]);
+    if (chatObj[0] === ''){
+        chatObj.shift();
+    }
+    await db.ref(`profile/${currUser}/chat`).update(chatObj);
 }
 
 
@@ -241,10 +239,8 @@ async function retrieveAllActiveConversations(currUser, db) {
         }
     });
 
-    console.log(dbChatsArray)
     for (const database in dbChatsArray) {
         let dbChat = await findChatroomByKey(database, db);
-        console.log(dbChat);
         if(!dbChat[0]){
             continue;
         }

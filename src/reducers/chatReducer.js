@@ -11,6 +11,14 @@ const chatReducer = (state = initState, action) => {
         chatHistory: action.payload
       }
 
+      case 'CONVOS':
+        let convo = state.conversations;
+        convo.push(action.payload);
+        return{
+          ...state,
+          conversations: convo
+        }
+
     default:
       return state    
   }

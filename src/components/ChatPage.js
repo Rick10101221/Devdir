@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import Send from '../actions/Send';
 
+var i = 0;
 // Chat page, with list of chats and conversation history
 class Chat extends React.Component{
 
@@ -16,13 +17,23 @@ class Chat extends React.Component{
   }
 
   render(){
+
+    let convos = this.props.conversations.map((c)=>{
+      return <ChatRoom a={c.names.user1} b={c.names.user2} key={'con'+i}/>
+    });
+
+    let ob = this.props.conversations[0].chat;
+    console.log(this.props.conversations[0].chat);
+    let mess = [];
+    for (const [key, value] of Object.entries(ob)){
+      mess.push(<ChatMessage author={value.author} mess={value.message} key={key + i++}/>);
+    }
+
     return(
       <div id="chat">
 
         <div id="chat-list">
-          <ChatRoom/>
-          <ChatRoom/>
- 
+          {convos}
           <p>--- No more conversations ---</p>
         </div>
 
@@ -33,8 +44,7 @@ class Chat extends React.Component{
           <div id="chat-history">
             <div id="chat-history-container">
               <p>--- Beginning of chat history ---</p>
-              <ChatMessage/>
-              <ChatMessage/>
+              {mess}
             </div>
           </div>
 

@@ -69,7 +69,8 @@ class ProfileForm extends React.Component{
       bio: this.state.bio,
       link: this.state.link,
       skill: newSkills,
-      active: this.props.active
+      active: this.props.active,
+      chat: ['']
     }
     console.log(prof);
     setProfile(prof, this.props.db, this.props.user);

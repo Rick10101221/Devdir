@@ -37,7 +37,6 @@ class App extends React.Component {
     require('firebase/auth');
     require('firebase/database');
     let getProfile = require('./firebase/profile.js').getProfile;
-    let conversations = require('./firebase/chatrooms.js').retrieveAllActiveConversations;
     require('dotenv').config();
 
     var app = firebase.initializeApp({
@@ -65,13 +64,23 @@ class App extends React.Component {
           let profile =  await getProfile(db, user);
           profile.skill = profile.skill.map( (skill) => {return {title: skill}});
           this.props.load(profile);
-          let convos = conversations(firebaseUser, db)
-          console.log(convos);
-      } else{
+          
+          db.ref(`profile/${user.uid}`).on('value', snapshot => {
+            profile = snapshot.val();
+            db.ref(`chatrooms/${profile.chat[profile.chat.length - 1]}`).on('value', snapshot => 
+            this.props.convos(snapshot.val()));
+          })
+
+          for( let i = 0; i < profile.chat.length - 1; i++){
+            db.ref(`chatrooms/${profile.chat[i]}`).on('value', snapshot => 
+            this.props.convos(snapshot.val()));
+          }
+
+
+        } else{
           console.log('not logged in');
           isLoggedIn = false;
       }
-      db.ref("test").on('value', snapshot => console.log("update"));
     })
     this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
 
@@ -81,7 +90,8 @@ class App extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     init: (obj) => {dispatch(Init(obj))},
-    load: (obj) => {dispatch(Load(obj))}
+    load: (obj) => {dispatch(Load(obj))},
+    convos: (obj) => {dispatch({type:'CONVOS', payload: obj})}
   }
 }
 export default connect(null, mapDispatchToProps)(App);
