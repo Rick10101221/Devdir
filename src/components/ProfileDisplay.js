@@ -24,11 +24,9 @@ class ProfileDisplay extends React.Component{
   render(){
     
     let skills = this.props.skill.map((skill) => {
-      console.log(skill);
-      console.log(skill.title);
-      return <Chip key={'skill' + i} label={skill.title} color="primary"/>
+      return <Chip key={'skill' + i++} label={skill.title} color="primary"/>
     });
-    console.log(skills);
+
     return(
       <div id="profile-display">
 

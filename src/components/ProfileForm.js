@@ -63,7 +63,16 @@ class ProfileForm extends React.Component{
 
   handleSave = () => {
     // TODO firebase update profile
-    setProfile({...this.state, active: this.props.active}, this.props.db, this.props.user);
+    let newSkills = this.props.tempSkills.map(skill => {return skill.title});
+    let prof = {
+      name: this.state.name,
+      bio: this.state.bio,
+      link: this.state.link,
+      skill: newSkills,
+      active: this.props.active
+    }
+    console.log(prof);
+    setProfile(prof, this.props.db, this.props.user);
     this.props.save({...this.state, tempSkills: this.props.tempSkills});
   }
 

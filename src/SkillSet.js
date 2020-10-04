@@ -882,7 +882,8 @@ let SkillSet = [
   {title:"ZetaLisp"},
   {title:"Zig"},
   {title:"ZOPL"},
-  {title:"ZPL"}
+  {title:"ZPL"},
+  {title:"Just Joined!"}
 ];
 
 export default SkillSet;
