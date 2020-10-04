@@ -53,6 +53,8 @@ class App extends React.Component {
     var db = firebase.database();
 
     let user = {};
+    
+   
 
     auth.onAuthStateChanged(async firebaseUser => {
       if(firebaseUser) {
@@ -69,6 +71,7 @@ class App extends React.Component {
           console.log('not logged in');
           isLoggedIn = false;
       }
+      db.ref("test").on('value', snapshot => console.log("update"));
     })
     this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn, user: user});
 
