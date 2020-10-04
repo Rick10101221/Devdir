@@ -44,7 +44,7 @@ class Login extends React.Component{
 
     return(
       <div id="loginContainer">
-        <h1>Dinder</h1>
+        <h1>Devdir</h1>
         <form noValidate autoComplete="off">
         <div id="textInput">
           <div><Input placeholder="Email" inputProps={{ 'aria-label': 'description' }} value={this.state.email} onChange={this.handleEmail}/></div>
@@ -66,6 +66,7 @@ class Login extends React.Component{
       </div>
     );
   }
+
 }
 
 const mapStateToProps = (state) => {

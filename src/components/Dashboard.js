@@ -10,8 +10,6 @@ import ChatIcon from '@material-ui/icons/Chat';
 import SearchIcon from '@material-ui/icons/Search';
 import Tooltip from "@material-ui/core/Tooltip";
 
-var logout = require('../firebase/login.js').logout;
-
 // Dashboard, will contain all subcomponents after login
 class Dashboard extends React.Component{
 
