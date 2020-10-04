@@ -21,9 +21,9 @@ class SearchResult extends React.Component{
     this.props.reject();
   }
 
-  handleRight = () => {
+  handleRight = async () => {
     this.props.accept();
-    create(this.props.user, this.props.other, this.props.db);
+    await create(this.props.user, this.props.other, this.props.db);
     this.props.gochat();
   }
 

@@ -22,16 +22,21 @@ class Chat extends React.Component{
   render(){
 
     let idx = 0;
-    let convos = this.props.conversations.map((c)=>{
-      return <ChatRoom a={c.names.user1} b={c.names.user2} c={idx++} key={'con'+i++}/>
-    });
+    let convos = []
+    if(this.props.conversations.length !== 0){
+      convos = this.props.conversations.map((c)=>{
+        return <ChatRoom a={c.names.user1} b={c.names.user2} c={idx++} key={'con'+i++}/>
+      });
+    } 
 
     let mess = [];
     if (this.props.chatIdx !== -1){
+      if(this.props.conversations[this.props.chatIdx] !== undefined){
       let ob = this.props.conversations[this.props.chatIdx].chat;
       for (const [key, value] of Object.entries(ob)){
         mess.push(<ChatMessage author={value.author} mess={value.message} key={key + i++}/>);
       }
+    }
     }
 
     console.log(this.props);
