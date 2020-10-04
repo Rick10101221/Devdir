@@ -1,28 +1,19 @@
-import { requirePropFactory } from '@material-ui/core';
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
-//import {app, auth, db} from './db/test';
-var firebase = require('firebase');
-require('firebase/auth');
-require('firebase/database');
-require('dotenv').config();
+import {connect} from 'react-redux';
+import Init from './actions/Init';
 
-var app = firebase.initializeApp({
-  apiKey: process.env.REACT_APP_apiKey,
-  authDomain: process.env.REACT_APP_authDomain,
-  databaseURL: process.env.REACT_APP_databaseURL,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId
-});
-
-var auth = firebase.auth();
-var db = firebase.database();
+var isLoggedIn = false;
 
 class App extends React.Component {
+
+  constructor(){
+    super();
+  }
+
   render(){
     return (
       <div id="App">
@@ -33,7 +24,7 @@ class App extends React.Component {
               <Dashboard/>
             </Route>
 
-            <Route path="/auth" exact>
+            <Route path="/auth">
               <Login/>
             </Route>
 
@@ -45,15 +36,45 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    console.log(app);
-    console.log(auth);
-    console.log(db);
+    var firebase = require('firebase');
+    require('firebase/auth');
+    require('firebase/database');
+    require('dotenv').config();
 
-    // TODO firebase check authenticated 
-    // TODO firebase get profile
-    // TODO firebase get conversations
-    // TODO firebase refresh messages from conversations[0]
+    var app = firebase.initializeApp({
+      apiKey: process.env.REACT_APP_apiKey,
+      authDomain: process.env.REACT_APP_authDomain,
+      databaseURL: process.env.REACT_APP_databaseURL,
+      projectId: process.env.REACT_APP_projectId,
+      storageBucket: process.env.REACT_APP_storageBucket,
+      messagingSenderId: process.env.REACT_APP_messagingSenderId
+    });
+
+    var auth = firebase.auth();
+    var db = firebase.database();
+    let user = {};
+
+    auth.onAuthStateChanged(firebaseUser => {
+      if(firebaseUser) {
+          console.log(firebaseUser);
+          //reroute to dashboard
+          user = firebaseUser;
+          isLoggedIn = true;
+          console.log(isLoggedIn);
+      } else{
+          console.log('not logged in');
+          isLoggedIn = false;
+      }
+    })
+
+    this.props.init({app: app, auth: auth, db: db, logged: isLoggedIn});
+
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    init: (obj) => {dispatch(Init(obj))}
+  }
+}
+export default connect(null, mapDispatchToProps)(App);
