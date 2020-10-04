@@ -14,7 +14,8 @@ function getProfile(db){
     console.log(db);
     db.ref(`profile/${user.uid}`).once('value').then((snapshot) => {
         if(snapshot.val()){
-            profile = snapshot.val();
+            console.log(snapshot.val);
+            return snapshot.val();
         }
         else{
             console.log("doesn't exist");
@@ -22,7 +23,7 @@ function getProfile(db){
     })
 }
 
-function setProfile(profile, db){
+function setProfile(profile, db, user){
     db.ref(`profile/${user.uid}`).set(profile).then(() => {console.log("profile set")})
 }
 

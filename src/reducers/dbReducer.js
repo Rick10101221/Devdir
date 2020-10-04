@@ -2,7 +2,8 @@ let initState = {
   app: {},
   auth: {},
   db: {},
-  logged: false
+  logged: false,
+  user: ''
 }
 
 const dbReducer = (state = initState, action) => {
@@ -13,7 +14,8 @@ const dbReducer = (state = initState, action) => {
         app: action.payload.app,
         auth: action.payload.auth,
         db: action.payload.db,
-        logged: action.payload.logged
+        logged: action.payload.logged,
+        user: action.payload.user
       }
 
     default:
