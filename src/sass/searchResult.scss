@@ -1,0 +1,79 @@
+#overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0, 0.55);
+}
+
+#overlay > img{
+  position: absolute;
+  top: 43vh;
+  height: 11.5vh;
+  transition: 0.115s;
+}
+
+#overlay > img:hover{
+  top: 42.35vh;
+}
+
+#swipeLeft{
+  left: 9.2vw;
+}
+
+#swipeRight{
+  left: 83.5vw;
+}
+
+#result{
+  background-color: #e4e4e4;
+  position: relative;
+  top: 12.5vh;
+  left: 18.5vw;
+  height: 75vh;
+  width: 63vw;
+  padding: 2.5%;
+  box-sizing: border-box;
+}
+
+#resultName{
+  font-size: 3.4em;
+  margin-bottom: 2vh;
+}
+
+#resultBio{
+  font-size: 1.4em;
+  padding: 0.7%;
+}
+
+#profile-display-skills{
+  overflow-y: auto;
+  height: fit-content;
+  max-height: 28vh;
+}
+
+#result > h3 {
+  font-size: 2em;
+  margin-top: 2%;
+}
+
+#linkContainer{
+  position: absolute;
+  left: 22vh;
+  bottom: 10%;
+  width: 100%;
+  height: 10vh;
+}
+
+#linkContainer > img{
+  height: 7vh;
+  margin-left: 13%;
+  position: relative;
+  top: 3vh;
+  transition: 0.13s;
+}
+
+#linkContainer > img:hover{
+  top: 2vh;
+}
